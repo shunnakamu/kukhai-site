@@ -178,6 +178,7 @@ a { color: inherit; }
   .wordmark img { height: clamp(2.2rem, 11vw, 3rem); }
   .chip--nav { padding-inline: var(--space-xs); }
   .lang { padding-inline: var(--space-2xs); letter-spacing: 0.08em; }
+  .person__role { letter-spacing: 0.02em; font-size: 0.68rem; }
 }
 
 /* 固定タブの下に見出しが潜らないように。--nav-h は実際のバー高さを JS が入れる
@@ -195,7 +196,7 @@ section[id], main[id] { scroll-margin-top: calc(var(--nav-h, 5.5rem) + var(--spa
   display: block;
   width: auto;
   height: clamp(3rem, 8vw, 4.5rem);
-  margin-inline-start: calc(var(--space-xs) * -1);  /* glow padding — optical alignment to the gutter */
+  /* 透過 PNG を余白ごとトリミング済みなので、光学補正の負マージンは不要 */
 }
 
 /* ---------- C1 · outlined chip ---------- */
@@ -281,7 +282,25 @@ section[id], main[id] { scroll-margin-top: calc(var(--nav-h, 5.5rem) + var(--spa
 :root[lang="ja"] body { line-height: 1.75; }
 :root[lang="ja"] .hero__display,
 :root[lang="ja"] .head-hang h2,
-:root[lang="ja"] .foot-stmt__line { letter-spacing: -0.01em; line-height: 1.25; }
+:root[lang="ja"] .foot-stmt__line {
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+}
+
+/* 締めの一行だけの調整。`max-width: 24ch` は英語の行長を揃えるための指定で、
+   どこでも改行できる日本語に当てると中途半端な位置で割れる。
+   ここは他の見出しと同じグループに入れないこと（入れると全見出しが巻き添えになる）。 */
+:root[lang="ja"] .foot-stmt__line {
+  max-width: none;
+  font-size: clamp(1.35rem, 3.6vw, 2.4rem);
+}
+
+/* 狭い画面では日本語の見出しだけ少し詰める。
+   既定サイズだと「既存システムとの連携」が 2 行に割れて最終行が数文字になる。
+   ここも見出し専用のルールとして単独で置く（他のセレクタと束ねない）。 */
+@media (max-width: 24rem) {
+  :root[lang="ja"] .head-hang h2 { font-size: clamp(1.5rem, 7.2vw, 2rem); }
+}
 
 /* ---------- hero · H2 split diptych ---------- */
 
@@ -464,11 +483,27 @@ section[id], main[id] { scroll-margin-top: calc(var(--nav-h, 5.5rem) + var(--spa
 
 .person {
   display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: var(--space-2xs);
-  padding: var(--space-lg) var(--space-md);
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-areas: "photo name link" "photo role link";
+  align-items: center;
+  column-gap: var(--space-md);
+  row-gap: var(--space-3xs);
+  padding: var(--space-md) var(--space-2xs);
   border-block-end: var(--rule-hair) solid var(--color-rule);
 }
+
+.person__photo {
+  grid-area: photo;
+  width: 88px;
+  height: 88px;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  background: var(--color-paper-2);
+}
+
+.person__name { grid-area: name; }
+.person__role { grid-area: role; }
+.person__link { grid-area: link; }
 
 .person:last-child { border-block-end: 0; }
 
@@ -593,7 +628,7 @@ section[id], main[id] { scroll-margin-top: calc(var(--nav-h, 5.5rem) + var(--spa
 .foot-stmt__line {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(1.6rem, 3.6vw, 2.6rem);
+  font-size: clamp(1.45rem, 3.6vw, 2.6rem);
   line-height: 1.1;
   letter-spacing: -0.03em;
   max-width: 24ch;
@@ -661,10 +696,12 @@ section[id], main[id] { scroll-margin-top: calc(var(--nav-h, 5.5rem) + var(--spa
   .map__arrow::before { content: "→"; }
 
   .person {
-    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr) auto;
-    align-items: baseline;
-    gap: var(--space-lg);
+    grid-template-columns: auto minmax(0, 6fr) minmax(0, 5fr) auto;
+    grid-template-areas: "photo name role link";
+    align-items: center;
+    column-gap: var(--space-lg);
   }
+  .person__photo { width: 112px; height: 112px; }
 
   .news__item {
     grid-template-columns: 8rem minmax(0, 1fr);
@@ -698,6 +735,7 @@ section[id], main[id] { scroll-margin-top: calc(var(--nav-h, 5.5rem) + var(--spa
   .wordmark img { height: clamp(2.2rem, 11vw, 3rem); }
   .chip--nav { padding-inline: var(--space-xs); }
   .lang { padding-inline: var(--space-2xs); letter-spacing: 0.08em; }
+  .person__role { letter-spacing: 0.02em; font-size: 0.68rem; }
 }
 
 @media (max-width: 23rem) {
