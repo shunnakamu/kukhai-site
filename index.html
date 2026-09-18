@@ -22,6 +22,12 @@
   <!-- masthead: 大きいワードマーク（固定しない） -->
   <header class="masthead reveal" style="--i: 0">
     <a class="wordmark" href="#top" aria-label="KUχAI"><img src="assets/kukhai-wordmark.png" alt="KUχAI" width="720" height="322" fetchpriority="high"></a>
+    <div class="masthead__actions">
+      <button class="lang" type="button" aria-label="Switch to Japanese" title="日本語 / English">
+        <span class="lang__en">EN</span><span class="lang__sep" aria-hidden="true">/</span><span class="lang__ja">JA</span>
+      </button>
+      <a class="chip chip--nav" href="#contact"><span data-ja="お問い合わせ">Contact</span><span class="chip__arrow" aria-hidden="true">→</span></a>
+    </div>
   </header>
 
   <!-- N5 · floating pill: スクロールしても残るタブ。押すとそのセクションへ飛ぶ -->
@@ -33,10 +39,6 @@
       <li><a class="tab" href="#team" data-ja="チーム">Team</a></li>
       <li><a class="tab" href="#news" data-ja="お知らせ">News</a></li>
     </ul>
-    <button class="lang" type="button" aria-label="Switch to Japanese" title="日本語 / English">
-      <span class="lang__en">EN</span><span class="lang__sep" aria-hidden="true">/</span><span class="lang__ja">JA</span>
-    </button>
-    <a class="chip chip--nav" href="#contact"><span data-ja="お問い合わせ">Contact</span><span class="chip__arrow" aria-hidden="true">→</span></a>
   </nav>
 
   <main id="top">
@@ -234,6 +236,17 @@
 
 <script>
 (function () {
+  // 固定バーの実高さを CSS に渡す（タブが折り返すと高さが変わるため）
+  var pill = document.querySelector('.pill');
+  function navHeight() {
+    if (!pill) return;
+    document.documentElement.style.setProperty('--nav-h', Math.ceil(pill.getBoundingClientRect().height) + 'px');
+  }
+  navHeight();
+  window.addEventListener('resize', navHeight);
+  if (window.ResizeObserver && pill) new ResizeObserver(navHeight).observe(pill);
+  document.addEventListener('click', function (e) { if (e.target.closest('.lang')) setTimeout(navHeight, 50); });
+
   var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
   if (!tabs.length || !('IntersectionObserver' in window)) return;
   var byId = {};
