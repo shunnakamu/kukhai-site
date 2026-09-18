@@ -88,27 +88,6 @@ a { color: inherit; }
   max-width: var(--measure);
 }
 
-/* スマホではタブを折り返して全部見せる（横スクロールに隠すと、そこにメニューがあると気づけない） */
-@media (max-width: 48rem) {
-  .pill {
-    border-radius: var(--radius-md);
-    padding: var(--space-2xs) var(--space-2xs);
-  }
-  .pill__tabs {
-    flex-wrap: wrap;
-    overflow-x: visible;
-    justify-content: flex-start;
-    gap: var(--space-3xs) var(--space-2xs);
-  }
-  .tab { font-size: var(--text-xs); padding-inline: var(--space-sm); min-height: 36px; }
-}
-
-/* 一番狭い端末では、ロゴ行の 3 要素が収まるように矢印を落とす */
-@media (max-width: 23rem) {
-  .chip--nav .chip__arrow { display: none; }
-  .chip--nav { padding-inline: var(--space-2xs); }
-}
-
 /* ---------- masthead（大きいワードマーク。固定しない） ---------- */
 
 .masthead {
@@ -139,7 +118,7 @@ a { color: inherit; }
   min-width: 0;
   padding: var(--space-2xs) var(--space-xs);
   border: var(--rule-hair) solid var(--color-rule);
-  border-radius: var(--radius-pill);
+  border-radius: var(--radius-md);
   background: var(--color-pill);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -167,7 +146,7 @@ a { color: inherit; }
   align-items: center;
   min-height: 40px;
   padding-inline: var(--space-md);
-  border-radius: var(--radius-pill);
+  border-radius: var(--radius-sm);
   color: var(--color-muted);
   font-size: var(--text-sm);
   font-weight: 500;
@@ -190,7 +169,7 @@ a { color: inherit; }
   flex: none;
   min-height: 40px;
   padding: var(--space-xs) var(--space-sm);
-  border-radius: var(--radius-pill);
+  border-radius: var(--radius-md);
   font-size: var(--text-xs);
 }
 
@@ -199,7 +178,6 @@ a { color: inherit; }
   .wordmark img { height: clamp(2.2rem, 11vw, 3rem); }
   .chip--nav { padding-inline: var(--space-xs); }
   .lang { padding-inline: var(--space-2xs); letter-spacing: 0.08em; }
-  .tab { padding-inline: var(--space-sm); }
 }
 
 /* 固定タブの下に見出しが潜らないように。--nav-h は実際のバー高さを JS が入れる
@@ -273,7 +251,7 @@ section[id], main[id] { scroll-margin-top: calc(var(--nav-h, 5.5rem) + var(--spa
   min-height: 40px;
   padding-inline: var(--space-sm);
   border: 0;
-  border-radius: var(--radius-pill);
+  border-radius: var(--radius-sm);
   background: transparent;
   color: var(--color-neutral);
   font-family: var(--font-body);
@@ -695,4 +673,34 @@ section[id], main[id] { scroll-margin-top: calc(var(--nav-h, 5.5rem) + var(--spa
   }
 
   .head-hang h2 { font-size: var(--text-3xl); }
+}
+
+/* ---------- モバイル: メニューを 1 行に収める ----------
+   基本ルールより後ろに置くこと（前に置くと .tab の padding 指定に負ける）。
+   折り返しも横スクロールもさせず、文字と余白を画面幅に追随させる。 */
+@media (max-width: 48rem) {
+  .pill { padding: var(--space-3xs) var(--space-2xs); }
+
+  .pill__tabs {
+    flex-wrap: nowrap;
+    overflow-x: visible;
+    justify-content: space-between;
+    gap: 0;
+  }
+
+  .tab {
+    font-size: clamp(0.62rem, 2.9vw, 0.8rem);
+    padding-inline: clamp(0.1rem, 1.4vw, 0.6rem);
+    min-height: 36px;
+    letter-spacing: 0;
+  }
+
+  .wordmark img { height: clamp(2.2rem, 11vw, 3rem); }
+  .chip--nav { padding-inline: var(--space-xs); }
+  .lang { padding-inline: var(--space-2xs); letter-spacing: 0.08em; }
+}
+
+@media (max-width: 23rem) {
+  .chip--nav .chip__arrow { display: none; }
+  .chip--nav { padding-inline: var(--space-2xs); }
 }
