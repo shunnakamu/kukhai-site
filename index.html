@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>KUχAI — Real-time intracardiac signal analysis for catheter ablation</title>
-<meta name="description" content="KUχAI builds Electra, a research-stage model that reads intracardiac electrograms and surface ECG during catheter ablation — physician-supervised annotation, channel reconstruction, and endpoint assessment, alongside the recording and mapping systems the lab already uses.">
+<meta name="description" content="KUχAI builds Electra, a model that reads intracardiac electrograms and surface ECG during catheter ablation — physician-supervised annotation, channel reconstruction, and endpoint assessment, alongside the recording and mapping systems the lab already uses.">
 <link rel="icon" href="assets/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-192.png">
@@ -46,9 +46,8 @@
     <!-- H2 · split diptych (7/5) -->
     <section class="hero">
       <div class="hero__body reveal" style="--i: 1">
-        <p class="status" data-ja="研究段階 · 臨床使用不可">Research stage · not for clinical use</p>
         <h1 class="hero__display" data-ja-html="カテーテルアブレーションの<span class=&quot;accent&quot;>リアルタイム心内電位解析</span>">Real-time <span class="accent">intracardiac signal analysis</span> for catheter ablation.</h1>
-        <p class="lede" data-ja="私たちが開発しているモデル Electra は、手技中の心内電位と体表 ECG を医師の監督下で解析する。EP ラボにある既存の記録システム・マッピングシステムと並べて使う。">Electra, the model we are building, reads intracardiac electrograms and the surface ECG during the case. It runs under physician supervision, alongside the recording and mapping systems the lab already uses.</p>
+        <p class="lede" data-ja="Electra は、アブレーション手技中の心内電位と体表 ECG をリアルタイムに読み取るモデル。医師の管理のもとで、EP ラボにすでにある記録システムや 3D マッピングシステムと併せて使う。">Electra, the model we are building, reads intracardiac electrograms and the surface ECG during the case. It runs under physician supervision, alongside the recording and mapping systems the lab already uses.</p>
         <a class="chip" href="#contact"><span data-ja="チームに相談する">Talk to the team</span><span class="chip__arrow" aria-hidden="true">→</span></a>
       </div>
 
@@ -97,19 +96,19 @@
     <section id="procedure" class="section section--tight reveal" style="--i: 3" aria-labelledby="h-procedure">
       <header class="head-hang">
         <h2 id="h-procedure" data-ja="Electra にできること">What Electra does</h2>
-        <p class="note" data-ja="モデルが行うよう作られている 3 つ。手技の進行と同じ順に。">Three things the model is built to do, in the order the case runs.</p>
+        <p class="note" data-ja="Electra が担う役割は 3 つ。手技の進行順に並べた。">Three things the model is built to do, in the order the case runs.</p>
       </header>
 
       <ol class="steps">
         <li class="step">
           <span class="step__stage">1.0</span>
           <h3 data-ja="録画全体を読む">Read the whole recording</h3>
-          <p data-ja="既存のシステムは、マップを作るために点をアノテーションする。Electra は時間軸に沿って録画を読む。心内電位と体表 ECG を同じ入力として扱うので、マップに載った点だけでなく、信号が何をしていたかが連続して残る。">Existing systems annotate points to build a map. Electra reads the recording along the time axis — intracardiac electrograms and the surface ECG together — so the case has a continuous record of what the signal was doing, not only the points that made it into the map.</p>
+          <p data-ja="既存のシステムは、マップを作るために点をアノテーションする。Electra は時間軸に沿って録画を読む。心内電位と体表 ECG を同じ入力として扱うため、マップ上の点だけでなく、信号がその間どう動いていたかも連続した記録として残る。">Existing systems annotate points to build a map. Electra reads the recording along the time axis — intracardiac electrograms and the surface ECG together — so the case has a continuous record of what the signal was doing, not only the points that made it into the map.</p>
         </li>
         <li class="step">
           <span class="step__stage">2.0</span>
-          <h3 data-ja="置いていない場所の心内電位を推定する">Estimate the signal where there is no catheter</h3>
-          <p data-ja-html="カテーテルは、置いた場所の電位しか記録しない。Electra は、記録されている体表 ECG と心内電位から、カテーテルを置いていない場所の心内電位を推定することを目指している。カテーテルを動かさずにその部位を見る、という狙い。<strong>ここはまだ研究段階で、使える精度には達していない。</strong>">A catheter only records where it sits. From the surface ECG and the channels that are recorded, Electra aims to estimate the intracardiac signal where no catheter is — so a site can be looked at without moving to it. <strong>This one is still research: it is not yet accurate enough to use.</strong></p>
+          <h3 data-ja="留置していない部位の心内電位を推定する">Estimate the signal where there is no catheter</h3>
+          <p data-ja-html="カテーテルは、留置した部位の電位しか記録しない。Electra は、記録されている体表 ECG と心内電位から、カテーテルを留置していない部位の心内電位を推定することを目指している。カテーテルを動かさずにその部位の電位を捉える、という狙い。">A catheter only records where it sits. From the surface ECG and the recorded channels, Electra aims to estimate the intracardiac signal where no catheter is — so a site can be evaluated without repositioning the catheter there.</p>
         </li>
         <li class="step">
           <span class="step__stage">3.0</span>
@@ -144,9 +143,9 @@
           <header class="head-hang">
             <h2 id="h-where" data-ja="既存システムとの連携">Working with existing systems</h2>
           </header>
-          <p class="lede" data-ja="Electra は EP 記録システム・3D マッピングシステムと並べて使う設計で、手技中にすでに記録されている信号を読み、アノテーション、再構成した心内電位、エンドポイントの評価を出力する。どちらの装置も置き換えない。">Electra is designed to run alongside the EP recording system and the 3D mapping system, reading the signals the lab already records and returning annotations, reconstructed channels, and an endpoint assessment. It does not replace either system.</p>
+          <p class="lede" data-ja="Electra は EP 記録システムや 3D マッピングシステムと併せて使う設計で、手技中にすでに記録されている信号を読み、アノテーション、再構成した心内電位、エンドポイントの評価を出力する。どちらの装置も置き換えない。">Electra is designed to run alongside the EP recording system and the 3D mapping system, reading the signals the lab already records and returning annotations, reconstructed channels, and an endpoint assessment. It does not replace either system.</p>
           <p class="note" data-ja="連携の方法は施設ごとに異なる。入力に使うのは、その EP ラボで既に記録している信号だ。">Integration varies from lab to lab; the inputs are always signals the lab already records.</p>
-          <p class="note" data-ja="Electra はベンダー非依存を前提に設計している。提供の形としては、EP 記録システムや 3D マッピングシステムのメーカーへのアルゴリズム・ライセンスを主に想定しており、病院に別の装置を売る形は想定していない。">Electra is designed to be vendor-agnostic. We expect the main route to be licensing the algorithms to EP recording and 3D mapping system companies, rather than selling a separate box to hospitals.</p>
+          <p class="note" data-ja="Electra はベンダー非依存を前提に設計されている。提供の形としては、EP 記録システムや 3D マッピングシステムのメーカーへのアルゴリズムライセンス供与を主に想定しており、病院に別の装置を売る形は想定していない。">Electra is designed to be vendor-agnostic. We expect the main route to be licensing the algorithms to EP recording and 3D mapping system companies, rather than selling a separate box to hospitals.</p>
         </div>
       </div>
     </section>
@@ -158,7 +157,6 @@
       </header>
       <div class="origin">
         <p class="lede" data-ja="KUχAI は京都大学のカテーテルアブレーション研究から生まれた。臨床と技術は一つのチームで、課題を定義している人間が、実際にアブレーションを行う術者でもある。">KUχAI grew out of catheter-ablation research at Kyoto University. Clinical and engineering are one team: the people specifying the problem are the ones performing the ablations.</p>
-        <p class="note" data-ja="Electra は研究段階のシステムであり、医療機器ではない。いかなる国・地域でも、医療機器としての承認・認証を受けていない。">Electra is a research-stage system. It is not a medical device, and it is not cleared or approved for clinical use in any jurisdiction.</p>
       </div>
     </section>
 
@@ -169,16 +167,19 @@
       </header>
       <ul class="team">
         <li class="person">
+          <img class="person__photo" src="assets/team/kohjitani.jpg" alt="" width="480" height="480" loading="lazy">
           <span class="person__name" data-ja="糀谷　泰彦">Hirohiko Kohjitani</span>
           <span class="person__role">Founder</span>
           <a class="person__link" href="https://www.linkedin.com/in/hirohiko-kohjitani" rel="noopener" aria-label="Hirohiko Kohjitani on LinkedIn" title="Hirohiko Kohjitani on LinkedIn"><svg class="icon-li" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"></path></svg></a>
         </li>
         <li class="person">
+          <img class="person__photo" src="assets/team/nakamura.jpg" alt="" width="480" height="480" loading="lazy">
           <span class="person__name" data-ja="中村　俊輔">Shunsuke Nakamura</span>
           <span class="person__role">Co-founder / CTO</span>
           <a class="person__link" href="https://www.linkedin.com/in/shunsuke-nakamura" rel="noopener" aria-label="Shunsuke Nakamura on LinkedIn" title="Shunsuke Nakamura on LinkedIn"><svg class="icon-li" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"></path></svg></a>
         </li>
         <li class="person">
+          <img class="person__photo" src="assets/team/yasuda.jpg" alt="" width="480" height="480" loading="lazy">
           <span class="person__name" data-ja="安田　晃">Akira Yasuda</span>
           <span class="person__role">Business lead</span>
           <a class="person__link" href="https://www.linkedin.com/in/sayrendipity" rel="noopener" aria-label="Akira Yasuda on LinkedIn" title="Akira Yasuda on LinkedIn"><svg class="icon-li" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"></path></svg></a>
@@ -210,10 +211,10 @@
       </header>
       <div class="contact">
         <div class="contact__rows">
-          <p class="contact__row"><span class="contact__key" data-ja="臨床">Clinical</span><span class="contact__val"><a href="mailto:hiro.kohjitani@kukhai.ai">hiro.kohjitani@kukhai.ai</a></span></p>
-          <p class="contact__row"><span class="contact__key" data-ja="技術">Technology</span><span class="contact__val"><a href="mailto:shun.nakamura@kukhai.ai">shun.nakamura@kukhai.ai</a></span></p>
-          <p class="contact__row"><span class="contact__key" data-ja="提携">Partnerships</span><span class="contact__val"><a href="mailto:akira.yasuda@kukhai.ai">akira.yasuda@kukhai.ai</a></span></p>
-          <p class="contact__row"><span class="contact__key" data-ja="会社">Company</span><span class="contact__val" data-ja="KUχAI（KUkhAI Inc.）· 日本・京都">KUχAI (KUkhAI Inc.) · Kyoto, Japan</span></p>
+          <p class="contact__row"><span class="contact__key" data-ja="臨床について">Clinical</span><span class="contact__val"><a href="mailto:hiro.kohjitani@kukhai.ai">hiro.kohjitani@kukhai.ai</a></span></p>
+          <p class="contact__row"><span class="contact__key" data-ja="技術について">Technology</span><span class="contact__val"><a href="mailto:shun.nakamura@kukhai.ai">shun.nakamura@kukhai.ai</a></span></p>
+          <p class="contact__row"><span class="contact__key" data-ja="提携・協業について">Partnerships</span><span class="contact__val"><a href="mailto:akira.yasuda@kukhai.ai">akira.yasuda@kukhai.ai</a></span></p>
+          <p class="contact__row"><span class="contact__key" data-ja="会社情報">Company</span><span class="contact__val" data-ja="KUχAI（KUkhAI Inc.）· 日本・京都">KUχAI (KUkhAI Inc.) · Kyoto, Japan</span></p>
         </div>
       </div>
     </section>
@@ -224,7 +225,7 @@
 <!-- Ft5 · statement -->
 <footer class="foot-stmt">
   <div class="shell">
-    <p class="foot-stmt__line" data-ja="実際に手技を行う術者と一緒に作っている。">Built with the people who perform the ablations.</p>
+    <p class="foot-stmt__line" data-ja="アブレーションの現場から。">Built with the people who perform the ablations.</p>
     <div class="foot-stmt__meta">
       <span>KUχAI · Electra</span>
       <a class="foot-stmt__li" href="https://www.linkedin.com/company/ku%CF%87ai/" rel="noopener" aria-label="KUχAI on LinkedIn" title="KUχAI on LinkedIn"><svg class="icon-li" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"></path></svg></a>
@@ -274,7 +275,7 @@
   };
   var DESC = {
     en: document.querySelector('meta[name="description"]').content,
-    ja: 'KUχAI が開発する Electra は、カテーテルアブレーション中の心内電位と体表 ECG を読み、医師の監督下でアノテーション・心内電位の再構成・エンドポイント評価を支援する研究段階のモデル。EP ラボにある既存の記録システム・マッピングシステムと並べて使う。'
+    ja: 'KUχAI が開発する Electra は、カテーテルアブレーション手技中の心内電位と体表 ECG を読み取り、医師の管理のもとでアノテーション、心内電位の再構成、エンドポイントの評価を支援するモデル。EP ラボにすでにある記録システムや 3D マッピングシステムと併せて使う。'
   };
   function apply(lang) {
     var ja = lang === 'ja';
