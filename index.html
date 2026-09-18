@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KUχAI — Real-time intracardiac signal analysis for catheter ablation</title>
+<meta name="description" content="KUχAI builds Electra, a research-stage model that reads intracardiac electrograms and surface ECG during catheter ablation — physician-supervised annotation, channel reconstruction, and endpoint assessment, alongside the recording and mapping systems the lab already uses.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@350;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+
+<div class="shell">
+
+  <!-- masthead: 大きいワードマーク（固定しない） -->
+  <header class="masthead reveal" style="--i: 0">
+    <a class="wordmark" href="#top" aria-label="KUχAI"><img src="assets/kukhai-wordmark.png" alt="KUχAI" width="720" height="322" fetchpriority="high"></a>
+  </header>
+
+  <!-- N5 · floating pill: スクロールしても残るタブ。押すとそのセクションへ飛ぶ -->
+  <nav class="pill reveal" style="--i: 1" aria-label="Sections">
+    <ul class="pill__tabs">
+      <li><a class="tab" href="#procedure" data-ja="技術">Technology</a></li>
+      <li><a class="tab" href="#where" data-ja="連携">Integration</a></li>
+      <li><a class="tab" href="#origin" data-ja="会社概要">About</a></li>
+      <li><a class="tab" href="#team" data-ja="チーム">Team</a></li>
+      <li><a class="tab" href="#news" data-ja="お知らせ">News</a></li>
+    </ul>
+    <button class="lang" type="button" aria-label="Switch to Japanese" title="日本語 / English">
+      <span class="lang__en">EN</span><span class="lang__sep" aria-hidden="true">/</span><span class="lang__ja">JA</span>
+    </button>
+    <a class="chip chip--nav" href="#contact"><span data-ja="お問い合わせ">Contact</span><span class="chip__arrow" aria-hidden="true">→</span></a>
+  </nav>
+
+  <main id="top">
+
+    <!-- H2 · split diptych (7/5) -->
+    <section class="hero">
+      <div class="hero__body reveal" style="--i: 1">
+        <p class="status" data-ja="研究段階 · 臨床使用不可">Research stage · not for clinical use</p>
+        <h1 class="hero__display" data-ja-html="カテーテルアブレーションの<span class=&quot;accent&quot;>リアルタイム心内電位解析</span>">Real-time <span class="accent">intracardiac signal analysis</span> for catheter ablation.</h1>
+        <p class="lede" data-ja="私たちが開発しているモデル Electra は、手技中の心内電位と体表 ECG を医師の監督下で解析する。EP ラボにある既存の記録システム・マッピングシステムと並べて使う。">Electra, the model we are building, reads intracardiac electrograms and the surface ECG during the case. It runs under physician supervision, alongside the recording and mapping systems the lab already uses.</p>
+        <a class="chip" href="#contact"><span data-ja="チームに相談する">Talk to the team</span><span class="chip__arrow" aria-hidden="true">→</span></a>
+      </div>
+
+      <figure class="figure reveal" style="--i: 2">
+        <div class="scope">
+          <svg viewBox="0 0 672 260" role="img" aria-labelledby="scope-title scope-desc" preserveAspectRatio="xMidYMid meet">
+            <title id="scope-title" data-ja="アノテーションのついた 2 チャネルの波形">Two signal traces, annotated</title>
+            <desc id="scope-desc" data-ja="上が体表 ECG、下が心内電位の波形。心内電位の各電位に縦線のマーカー（アノテーション）が付いている。">A surface ECG trace above an intracardiac electrogram trace; vertical marks sit on each intracardiac deflection.</desc>
+
+            <path class="wave wave--surface" d="M0 74.0 L0.0 74.0 L10.0 74.0 L16.0 70.0 L22.0 74.0 L30.0 74.0 L34.0 77.0 L38.0 40.0 L44.0 88.0 L48.0 74.0 L60.0 74.0 L70.0 65.0 L80.0 74.0 L96.0 74.0 L106.0 74.0 L112.0 70.0 L118.0 74.0 L126.0 74.0 L130.0 77.0 L134.0 40.0 L140.0 88.0 L144.0 74.0 L156.0 74.0 L166.0 65.0 L176.0 74.0 L192.0 74.0 L202.0 74.0 L208.0 70.0 L214.0 74.0 L222.0 74.0 L226.0 77.0 L230.0 40.0 L236.0 88.0 L240.0 74.0 L252.0 74.0 L262.0 65.0 L272.0 74.0 L288.0 74.0 L298.0 74.0 L304.0 70.0 L310.0 74.0 L318.0 74.0 L322.0 77.0 L326.0 40.0 L332.0 88.0 L336.0 74.0 L348.0 74.0 L358.0 65.0 L368.0 74.0 L384.0 74.0 L394.0 74.0 L400.0 70.0 L406.0 74.0 L414.0 74.0 L418.0 77.0 L422.0 40.0 L428.0 88.0 L432.0 74.0 L444.0 74.0 L454.0 65.0 L464.0 74.0 L480.0 74.0 L490.0 74.0 L496.0 70.0 L502.0 74.0 L510.0 74.0 L514.0 77.0 L518.0 40.0 L524.0 88.0 L528.0 74.0 L540.0 74.0 L550.0 65.0 L560.0 74.0 L576.0 74.0 L586.0 74.0 L592.0 70.0 L598.0 74.0 L606.0 74.0 L610.0 77.0 L614.0 40.0 L620.0 88.0 L624.0 74.0 L636.0 74.0 L646.0 65.0 L656.0 74.0 L672.0 74.0"></path>
+
+            <path class="wave wave--egm" d="M0 190.0 L12.0 190.0 L15.0 184.0 L18.0 190.0 L26.0 190.0 L30.0 168.0 L33.0 210.0 L36.0 184.0 L40.0 190.0 L54.0 190.0 L58.0 195.0 L62.0 190.0 L96.0 190.0 L108.0 190.0 L111.0 184.0 L114.0 190.0 L122.0 190.0 L126.0 168.0 L129.0 210.0 L132.0 184.0 L136.0 190.0 L150.0 190.0 L154.0 195.0 L158.0 190.0 L192.0 190.0 L204.0 190.0 L207.0 184.0 L210.0 190.0 L218.0 190.0 L222.0 168.0 L225.0 210.0 L228.0 184.0 L232.0 190.0 L246.0 190.0 L250.0 195.0 L254.0 190.0 L288.0 190.0 L300.0 190.0 L303.0 184.0 L306.0 190.0 L314.0 190.0 L318.0 168.0 L321.0 210.0 L324.0 184.0 L328.0 190.0 L342.0 190.0 L346.0 195.0 L350.0 190.0 L384.0 190.0 L396.0 190.0 L399.0 184.0 L402.0 190.0 L410.0 190.0 L414.0 168.0 L417.0 210.0 L420.0 184.0 L424.0 190.0 L438.0 190.0 L442.0 195.0 L446.0 190.0 L480.0 190.0 L492.0 190.0 L495.0 184.0 L498.0 190.0 L506.0 190.0 L510.0 168.0 L513.0 210.0 L516.0 184.0 L520.0 190.0 L534.0 190.0 L538.0 195.0 L542.0 190.0 L576.0 190.0 L588.0 190.0 L591.0 184.0 L594.0 190.0 L602.0 190.0 L606.0 168.0 L609.0 210.0 L612.0 184.0 L616.0 190.0 L630.0 190.0 L634.0 195.0 L638.0 190.0 L672.0 190.0"></path>
+
+            <g class="tick" stroke-dasharray="3 5">
+              <line x1="30" y1="150" x2="30" y2="232"></line>
+              <line x1="126" y1="150" x2="126" y2="232"></line>
+              <line x1="222" y1="150" x2="222" y2="232"></line>
+              <line x1="318" y1="150" x2="318" y2="232"></line>
+              <line x1="414" y1="150" x2="414" y2="232"></line>
+              <line x1="510" y1="150" x2="510" y2="232"></line>
+              <line x1="606" y1="150" x2="606" y2="232"></line>
+            </g>
+            <g class="tick-cap">
+              <circle cx="30" cy="146" r="3.5"></circle>
+              <circle cx="126" cy="146" r="3.5"></circle>
+              <circle cx="222" cy="146" r="3.5"></circle>
+              <circle cx="318" cy="146" r="3.5"></circle>
+              <circle cx="414" cy="146" r="3.5"></circle>
+              <circle cx="510" cy="146" r="3.5"></circle>
+              <circle cx="606" cy="146" r="3.5"></circle>
+            </g>
+          </svg>
+        </div>
+
+        <figcaption>
+          <span class="legend">
+            <span class="legend__item legend__item--surface"><span class="legend__key" aria-hidden="true"></span><span data-ja="体表 ECG">Surface ECG</span></span>
+            <span class="legend__item legend__item--egm"><span class="legend__key" aria-hidden="true"></span><span data-ja="心内電位">Intracardiac EGM</span></span>
+            <span class="legend__item legend__item--mark"><span class="legend__key" aria-hidden="true"></span><span data-ja="アノテーション">Annotation</span></span>
+          </span>
+        </figcaption>
+      </figure>
+    </section>
+
+    <!-- F4 · step sequence -->
+    <section id="procedure" class="section section--tight reveal" style="--i: 3" aria-labelledby="h-procedure">
+      <header class="head-hang">
+        <h2 id="h-procedure" data-ja="Electra にできること">What Electra does</h2>
+        <p class="note" data-ja="モデルが行うよう作られている 3 つ。手技の進行と同じ順に。">Three things the model is built to do, in the order the case runs.</p>
+      </header>
+
+      <ol class="steps">
+        <li class="step">
+          <span class="step__stage">1.0</span>
+          <h3 data-ja="録画全体を読む">Read the whole recording</h3>
+          <p data-ja="既存のシステムは、マップを作るために点をアノテーションする。Electra は時間軸に沿って録画を読む。心内電位と体表 ECG を同じ入力として扱うので、マップに載った点だけでなく、信号が何をしていたかが連続して残る。">Existing systems annotate points to build a map. Electra reads the recording along the time axis — intracardiac electrograms and the surface ECG together — so the case has a continuous record of what the signal was doing, not only the points that made it into the map.</p>
+        </li>
+        <li class="step">
+          <span class="step__stage">2.0</span>
+          <h3 data-ja="置いていない場所の心内電位を推定する">Estimate the signal where there is no catheter</h3>
+          <p data-ja-html="カテーテルは、置いた場所の電位しか記録しない。Electra は、記録されている体表 ECG と心内電位から、カテーテルを置いていない場所の心内電位を推定することを目指している。カテーテルを動かさずにその部位を見る、という狙い。<strong>ここはまだ研究段階で、使える精度には達していない。</strong>">A catheter only records where it sits. From the surface ECG and the channels that are recorded, Electra aims to estimate the intracardiac signal where no catheter is — so a site can be looked at without moving to it. <strong>This one is still research: it is not yet accurate enough to use.</strong></p>
+        </li>
+        <li class="step">
+          <span class="step__stage">3.0</span>
+          <h3 data-ja="アブレーションのエンドポイント評価を支える">Assess the ablation endpoint</h3>
+          <p data-ja="この焼灼で十分か、同じラインをもう一度なぞるか——通電のたびに術者が下す判断を Electra が支える。">Electra supports the call the operator makes at the end of each ablation application: is this lesion adequate, or does the line need another pass?</p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- alternating diptych: figure left, text right -->
+    <section id="where" class="section reveal" style="--i: 4" aria-labelledby="h-where">
+      <div class="split">
+        <figure class="figure">
+          <div class="map">
+            <div class="map__group">
+              <p class="map__node" data-ja="EP 記録システム">EP recording system</p>
+              <p class="map__node" data-ja="3D マッピングシステム">3D mapping system</p>
+            </div>
+            <span class="map__arrow" aria-hidden="true"></span>
+            <p class="map__node map__node--core">Electra</p>
+            <span class="map__arrow" aria-hidden="true"></span>
+            <div class="map__group">
+              <p class="map__node" data-ja="アノテーション">Annotations</p>
+              <p class="map__node" data-ja="再構成した心内電位">Reconstructed channels</p>
+              <p class="map__node" data-ja="エンドポイント評価">Endpoint assessment</p>
+            </div>
+          </div>
+          <figcaption data-ja="信号の経路 — 何を入力し、何を返すか">Signal path — what goes in, what comes back</figcaption>
+        </figure>
+
+        <div class="split__text">
+          <header class="head-hang">
+            <h2 id="h-where" data-ja="既存システムとの連携">Working with existing systems</h2>
+          </header>
+          <p class="lede" data-ja="Electra は EP 記録システム・3D マッピングシステムと並べて使う設計で、手技中にすでに記録されている信号を読み、アノテーション、再構成した心内電位、エンドポイントの評価を出力する。どちらの装置も置き換えない。">Electra is designed to run alongside the EP recording system and the 3D mapping system, reading the signals the lab already records and returning annotations, reconstructed channels, and an endpoint assessment. It does not replace either system.</p>
+          <p class="note" data-ja="連携の方法は施設ごとに異なる。入力に使うのは、その EP ラボで既に記録している信号だ。">Integration varies from lab to lab; the inputs are always signals the lab already records.</p>
+          <p class="note" data-ja="Electra はベンダー非依存を前提に設計している。提供の形としては、EP 記録システムや 3D マッピングシステムのメーカーへのアルゴリズム・ライセンスを主に想定しており、病院に別の装置を売る形は想定していない。">Electra is designed to be vendor-agnostic. We expect the main route to be licensing the algorithms to EP recording and 3D mapping system companies, rather than selling a separate box to hospitals.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- origin -->
+    <section id="origin" class="section section--tight reveal" style="--i: 5" aria-labelledby="h-origin">
+      <header class="head-hang">
+        <h2 id="h-origin" data-ja="KUχAI について">About KUχAI</h2>
+      </header>
+      <div class="origin">
+        <p class="lede" data-ja="KUχAI は京都大学のカテーテルアブレーション研究から生まれた。臨床と技術は一つのチームで、課題を定義している人間が、実際にアブレーションを行う術者でもある。">KUχAI grew out of catheter-ablation research at Kyoto University. Clinical and engineering are one team: the people specifying the problem are the ones performing the ablations.</p>
+        <p class="note" data-ja="Electra は研究段階のシステムであり、医療機器ではない。いかなる国・地域でも、医療機器としての承認・認証を受けていない。">Electra is a research-stage system. It is not a medical device, and it is not cleared or approved for clinical use in any jurisdiction.</p>
+      </div>
+    </section>
+
+    <!-- team -->
+    <section id="team" class="section section--tight reveal" style="--i: 6" aria-labelledby="h-team">
+      <header class="head-hang">
+        <h2 id="h-team" data-ja="チーム">Team</h2>
+      </header>
+      <ul class="team">
+        <li class="person">
+          <span class="person__name" data-ja="糀谷　泰彦">Hirohiko Kohjitani</span>
+          <span class="person__role">Founder</span>
+          <a class="person__link" href="https://www.linkedin.com/in/hirohiko-kohjitani" rel="noopener" aria-label="Hirohiko Kohjitani on LinkedIn" title="Hirohiko Kohjitani on LinkedIn"><svg class="icon-li" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"></path></svg></a>
+        </li>
+        <li class="person">
+          <span class="person__name" data-ja="中村　俊輔">Shunsuke Nakamura</span>
+          <span class="person__role">Co-founder / CTO</span>
+          <a class="person__link" href="https://www.linkedin.com/in/shunsuke-nakamura" rel="noopener" aria-label="Shunsuke Nakamura on LinkedIn" title="Shunsuke Nakamura on LinkedIn"><svg class="icon-li" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"></path></svg></a>
+        </li>
+        <li class="person">
+          <span class="person__name" data-ja="安田　晃">Akira Yasuda</span>
+          <span class="person__role">Business lead</span>
+          <a class="person__link" href="https://www.linkedin.com/in/sayrendipity" rel="noopener" aria-label="Akira Yasuda on LinkedIn" title="Akira Yasuda on LinkedIn"><svg class="icon-li" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"></path></svg></a>
+        </li>
+      </ul>
+    </section>
+
+
+    <!-- news -->
+    <section id="news" class="section section--tight reveal" style="--i: 7" aria-labelledby="h-news">
+      <header class="head-hang">
+        <h2 id="h-news" data-ja="お知らせ">News</h2>
+      </header>
+      <ol class="news">
+        <li class="news__item">
+          <time class="news__date" datetime="2026-10" data-ja="2026年10〜11月">Oct–Nov 2026</time>
+          <p class="news__text" data-ja="JETRO の J-StarX プログラムで Mayo Clinic を訪問（予定）。">Visiting Mayo Clinic through JETRO&#39;s J-StarX program.</p>
+        </li>
+        <li class="news__item">
+          <time class="news__date" datetime="2026-09" data-ja="2026年9月">Sep 2026</time>
+          <p class="news__text" data-ja-html="2026 HRX Pitch Competition の&lt;a class=&quot;news__link&quot; href=&quot;https://experiencehrx.com/hrx-live/pitch-competition/pitch-competition-semi-finalists/&quot; rel=&quot;noopener&quot;&gt;セミファイナリスト&lt;/a&gt;に選出（アトランタ）。">Semi-Finalist, <a class="news__link" href="https://experiencehrx.com/hrx-live/pitch-competition/pitch-competition-semi-finalists/" rel="noopener">2026 HRX Pitch Competition</a> in Atlanta.</p>
+        </li>
+      </ol>
+    </section>
+    <!-- contact -->
+    <section class="section section--tight reveal" style="--i: 7" id="contact" aria-labelledby="h-contact">
+      <header class="head-hang">
+        <h2 id="h-contact" data-ja="お問い合わせ">Contact</h2>
+      </header>
+      <div class="contact">
+        <div class="contact__rows">
+          <p class="contact__row"><span class="contact__key" data-ja="臨床">Clinical</span><span class="contact__val"><a href="mailto:hiro.kohjitani@kukhai.ai">hiro.kohjitani@kukhai.ai</a></span></p>
+          <p class="contact__row"><span class="contact__key" data-ja="技術">Technology</span><span class="contact__val"><a href="mailto:shun.nakamura@kukhai.ai">shun.nakamura@kukhai.ai</a></span></p>
+          <p class="contact__row"><span class="contact__key" data-ja="提携">Partnerships</span><span class="contact__val"><a href="mailto:akira.yasuda@kukhai.ai">akira.yasuda@kukhai.ai</a></span></p>
+          <p class="contact__row"><span class="contact__key" data-ja="会社">Company</span><span class="contact__val" data-ja="KUχAI（KUkhAI Inc.）· 日本・京都">KUχAI (KUkhAI Inc.) · Kyoto, Japan</span></p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- Ft5 · statement -->
+<footer class="foot-stmt">
+  <div class="shell">
+    <p class="foot-stmt__line" data-ja="実際に手技を行う術者と一緒に作っている。">Built with the people who perform the ablations.</p>
+    <div class="foot-stmt__meta">
+      <span>KUχAI · Electra</span>
+      <a class="foot-stmt__li" href="https://www.linkedin.com/company/ku%CF%87ai/" rel="noopener" aria-label="KUχAI on LinkedIn" title="KUχAI on LinkedIn"><svg class="icon-li" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"></path></svg></a>
+      <span>© 2026 KUkhAI Inc.</span>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+(function () {
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+  if (!tabs.length || !('IntersectionObserver' in window)) return;
+  var byId = {};
+  tabs.forEach(function (t) { byId[t.getAttribute('href').slice(1)] = t; });
+  var seen = {};
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) { seen[e.target.id] = e.isIntersecting ? e.intersectionRatio : 0; });
+    var best = null, bestRatio = 0;
+    Object.keys(seen).forEach(function (id) { if (seen[id] > bestRatio) { bestRatio = seen[id]; best = id; } });
+    tabs.forEach(function (t) { t.removeAttribute('aria-current'); });
+    if (best && byId[best]) byId[best].setAttribute('aria-current', 'true');
+  }, { rootMargin: '-40% 0px -50% 0px', threshold: [0, 0.25, 0.5, 1] });
+  Object.keys(byId).forEach(function (id) { var el = document.getElementById(id); if (el) io.observe(el); });
+})();
+</script>
+
+
+<script>
+(function () {
+  var doc = document.documentElement;
+  var btn = document.querySelector('.lang');
+  var TITLE = {
+    en: document.title,
+    ja: 'KUχAI — カテーテルアブレーションのリアルタイム心内電位解析'
+  };
+  var DESC = {
+    en: document.querySelector('meta[name="description"]').content,
+    ja: 'KUχAI が開発する Electra は、カテーテルアブレーション中の心内電位と体表 ECG を読み、医師の監督下でアノテーション・心内電位の再構成・エンドポイント評価を支援する研究段階のモデル。EP ラボにある既存の記録システム・マッピングシステムと並べて使う。'
+  };
+  function apply(lang) {
+    var ja = lang === 'ja';
+    document.querySelectorAll('[data-ja], [data-ja-html]').forEach(function (el) {
+      if (!el.hasAttribute('data-en')) {
+        el.setAttribute('data-en', el.hasAttribute('data-ja-html') ? el.innerHTML : el.textContent);
+      }
+      if (el.hasAttribute('data-ja-html')) {
+        el.innerHTML = ja ? el.getAttribute('data-ja-html') : el.getAttribute('data-en');
+      } else {
+        el.textContent = ja ? el.getAttribute('data-ja') : el.getAttribute('data-en');
+      }
+    });
+    doc.lang = ja ? 'ja' : 'en';
+    document.title = ja ? TITLE.ja : TITLE.en;
+    document.querySelector('meta[name="description"]').content = ja ? DESC.ja : DESC.en;
+    if (btn) {
+      btn.setAttribute('aria-label', ja ? 'Switch to English' : 'Switch to Japanese');
+      btn.dataset.lang = ja ? 'ja' : 'en';
+    }
+    try { localStorage.setItem('kukhai-lang', ja ? 'ja' : 'en'); } catch (e) {}
+  }
+  var saved = 'en';
+  try { saved = localStorage.getItem('kukhai-lang') || 'en'; } catch (e) {}
+  apply(saved);
+  if (btn) btn.addEventListener('click', function () { apply(doc.lang === 'ja' ? 'en' : 'ja'); });
+})();
+</script>
+
+</body>
+</html>
