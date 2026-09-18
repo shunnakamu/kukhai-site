@@ -1,0 +1,81 @@
+/* Hallmark · tokens · KUχAI (kukhai.ai)
+ * Theme: Midnight, re-anchored to the KUχAI business-card palette.
+ * Source of truth for the brand hexes: personal-hub/kukhai/business-cards/src_us/card.css
+ *   navy #061126 · ivory #F5F1E6 · cyan #4FB8FF · cyan-deep #0068CB · gold #F5C842
+ * Anchor hue: 261 (navy). Neutrals are tinted toward it.
+ */
+
+:root {
+  /* ---- colour: paper (dark, elevation by lightness) ---- */
+  --color-paper:    oklch(18.1% 0.046 261);  /* #061126 — card navy */
+  --color-paper-2:  oklch(22.0% 0.040 261);
+  --color-paper-3:  oklch(26.0% 0.036 261);
+  --color-rule:     oklch(34.0% 0.030 261);  /* hairline dividers (decorative) */
+  --color-edge:     oklch(52.0% 0.030 261);  /* interactive boundaries — 3.4:1 on paper */
+
+  /* ---- colour: ink + neutrals ---- */
+  --color-ink:      oklch(95.8% 0.015 90);   /* #F5F1E6 — card ivory */
+  --color-muted:    oklch(76.0% 0.014 261);
+  --color-neutral:  oklch(62.0% 0.020 261);
+
+  /* ---- colour: accent (one, plus a sparing signal) ---- */
+  --color-accent:      oklch(75.2% 0.140 242); /* #4FB8FF — card cyan */
+  --color-accent-deep: oklch(52.6% 0.173 255); /* #0068CB */
+  --color-signal:      oklch(85.0% 0.153 90);  /* #F5C842 — gold, point use only */
+  --color-focus:       oklch(80.0% 0.130 242);
+
+  /* atmospheric ground — two fixed blooms, no animation */
+  --color-bloom-1:     oklch(52.6% 0.173 255 / 0.20);
+  --color-bloom-2:     oklch(52.6% 0.173 255 / 0.13);
+
+  /* sticky pill — 背後の波形が透けるが文字は読める濃さ */
+  --color-pill:        oklch(20.0% 0.042 261 / 0.82);
+
+  /* ---- type ---- */
+  --font-display:  "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-body:     "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-outlier:  "JetBrains Mono", ui-monospace, monospace;
+
+  --text-xs:       0.8rem;
+  --text-sm:       0.875rem;
+  --text-base:     1rem;
+  --text-md:       1.25rem;
+  --text-lg:       1.5625rem;
+  --text-xl:       1.9531rem;
+  --text-2xl:      2.4414rem;
+  --text-3xl:      3.0518rem;
+  --text-display:  clamp(2.5rem, 4.4vw + 1rem, 4.4rem);
+
+  /* ---- space (4pt scale) ---- */
+  --space-3xs: 0.125rem;
+  --space-2xs: 0.25rem;
+  --space-xs:  0.5rem;
+  --space-sm:  0.75rem;
+  --space-md:  1rem;
+  --space-lg:  1.5rem;
+  --space-xl:  2.5rem;
+  --space-2xl: 4rem;
+  --space-3xl: 6rem;
+  --space-4xl: 9rem;
+  --page-gutter: clamp(1rem, 4vw, 4.5rem);
+  --measure: 62ch;
+
+  /* ---- line + radius ---- */
+  --rule-hair: 1px;
+  --radius-sm: 4px;
+  --radius-md: 10px;
+  --radius-pill: 999px;
+
+  /* ---- motion ---- */
+  --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in:     cubic-bezier(0.7, 0, 0.84, 0);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-micro: 120ms;
+  --dur-short: 200ms;  /* Midnight runs 0.9× */
+  --dur-long:  380ms;
+
+  /* ---- z ---- */
+  --z-base:   1;
+  --z-raised: 10;
+  --z-sticky: 200;
+}
