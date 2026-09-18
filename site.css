@@ -88,12 +88,43 @@ a { color: inherit; }
   max-width: var(--measure);
 }
 
+/* スマホではタブを折り返して全部見せる（横スクロールに隠すと、そこにメニューがあると気づけない） */
+@media (max-width: 48rem) {
+  .pill {
+    border-radius: var(--radius-md);
+    padding: var(--space-2xs) var(--space-2xs);
+  }
+  .pill__tabs {
+    flex-wrap: wrap;
+    overflow-x: visible;
+    justify-content: flex-start;
+    gap: var(--space-3xs) var(--space-2xs);
+  }
+  .tab { font-size: var(--text-xs); padding-inline: var(--space-sm); min-height: 36px; }
+}
+
+/* 一番狭い端末では、ロゴ行の 3 要素が収まるように矢印を落とす */
+@media (max-width: 23rem) {
+  .chip--nav .chip__arrow { display: none; }
+  .chip--nav { padding-inline: var(--space-2xs); }
+}
+
 /* ---------- masthead（大きいワードマーク。固定しない） ---------- */
 
 .masthead {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
   padding-block: var(--space-md) var(--space-xs);
+}
+
+/* 言語切替と CTA はロゴの行に置く。ピルに同居させるとスマホでタブが押し出されて見えなくなる */
+.masthead__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  flex: none;
 }
 
 /* ---------- N5 · floating pill（スクロールしても残るタブ） ---------- */
@@ -106,7 +137,7 @@ a { color: inherit; }
   align-items: center;
   gap: var(--space-sm);
   min-width: 0;
-  padding: var(--space-2xs);
+  padding: var(--space-2xs) var(--space-xs);
   border: var(--rule-hair) solid var(--color-rule);
   border-radius: var(--radius-pill);
   background: var(--color-pill);
@@ -117,6 +148,7 @@ a { color: inherit; }
 
 .pill__tabs {
   list-style: none;
+  width: 100%;
   display: flex;
   align-items: center;
   gap: var(--space-3xs);
@@ -155,15 +187,24 @@ a { color: inherit; }
 .tab:active { color: var(--color-accent); }
 
 .chip--nav {
-  margin-inline-start: auto;
   flex: none;
   min-height: 40px;
-  padding: var(--space-xs) var(--space-md);
+  padding: var(--space-xs) var(--space-sm);
   border-radius: var(--radius-pill);
+  font-size: var(--text-xs);
 }
 
-/* 固定タブの下に見出しが潜らないように */
-section[id], main[id] { scroll-margin-top: 5.5rem; }
+/* スマホでは行に 3 つ載せるので、ロゴとボタンを詰める */
+@media (max-width: 30rem) {
+  .wordmark img { height: clamp(2.2rem, 11vw, 3rem); }
+  .chip--nav { padding-inline: var(--space-xs); }
+  .lang { padding-inline: var(--space-2xs); letter-spacing: 0.08em; }
+  .tab { padding-inline: var(--space-sm); }
+}
+
+/* 固定タブの下に見出しが潜らないように。--nav-h は実際のバー高さを JS が入れる
+   （言語・画面幅でタブが 1 段 / 2 段に変わるので固定値だと隠れる） */
+section[id], main[id] { scroll-margin-top: calc(var(--nav-h, 5.5rem) + var(--space-md)); }
 
 .wordmark {
   display: block;
@@ -230,7 +271,6 @@ section[id], main[id] { scroll-margin-top: 5.5rem; }
   align-items: center;
   gap: 0.25em;
   min-height: 40px;
-  margin-inline-start: auto;
   padding-inline: var(--space-sm);
   border: 0;
   border-radius: var(--radius-pill);
