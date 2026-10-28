@@ -491,6 +491,28 @@ if(Q.has("t")) seekTo(Number(Q.get("t")));
   // the content's own height: documentElement.scrollHeight never drops below the iframe, so the frame could only grow
   function report(){ try { var a = document.querySelector('.app') || document.body;
     parent.postMessage({kukhaiDemoHeight: Math.ceil(a.getBoundingClientRect().bottom + window.scrollY) + 4}, '*'); } catch (e) {} }
+  // the parent says how tall this demo may be to show without scrolling.
+  // Demo 2 draws from the canvas size on every frame, so its canvases get flatter (full width, same text size) and are redrawn.
+  // Demo 1 lays its leads out at fixed pixel rows, so its one canvas shrinks as a whole instead.
+  function fit(budget){ try {
+    var app = document.querySelector('.app') || document.body;
+    var flat = !!document.getElementById('wv');
+    var cs = Array.prototype.slice.call(document.querySelectorAll('#cv,#wv'));
+    cs.forEach(function(c){ if (!c.dataset.h0) c.dataset.h0 = c.height; c.style.maxHeight = '';
+      if (flat && c.height != c.dataset.h0) c.height = +c.dataset.h0; });
+    if (flat) redraw();
+    var over = app.getBoundingClientRect().height - budget;
+    if (over > 0 && cs.length) {
+      var hs = cs.map(function(c){ return c.getBoundingClientRect().height; });
+      var sum = hs.reduce(function(a, b){ return a + b; }, 0);
+      var k = Math.max(0.3, (sum - over) / sum);
+      if (flat) { cs.forEach(function(c){ c.height = Math.round(c.dataset.h0 * k); }); redraw(); }
+      else cs.forEach(function(c, i){ c.style.maxHeight = Math.max(90, Math.floor(hs[i] * k)) + 'px'; });
+    }
+    report();
+  } catch (e) {} }
+  function redraw(){ try { if (typeof draw === 'function') draw(); if (typeof drawWave === 'function') drawWave(); } catch (e) {} }
+  window.addEventListener('message', function(e){ var b = e.data && e.data.kukhaiBudget; if (b > 200) fit(b); });
   window.addEventListener('load', report); window.addEventListener('resize', report);
   if (window.ResizeObserver) new ResizeObserver(report).observe(document.body);
 })();
@@ -506,12 +528,24 @@ html::-webkit-scrollbar,body::-webkit-scrollbar{display:none}
 .verdict .why,.verdict .why b{display:none!important}
 .verdict .nums{margin-top:4px!important}
 .steps,.now{display:none!important}
-#cv,#wv{max-height:360px;width:auto!important;max-width:100%;margin-inline:auto}
-#wv{max-height:200px}
-.box canvas#cv{max-height:200px}
+#cv{margin-inline:auto}
+/* demo 1 on PC: the verdict sits left of the scope, so the waveform keeps its height */
+@media (min-width:900px){
+  .app:has(#verdict){display:grid;grid-template-columns:minmax(200px,24%) minmax(0,1fr);gap:12px;align-items:stretch}
+  .app:has(#verdict) .verdict{margin:0!important}
+  .app:has(#verdict) .scope{margin:0!important}
+}
 @media (min-width:700px){
   .verdict .row{flex-wrap:nowrap!important;gap:16px 40px!important}
-  .verdict .row>*{flex:1 1 0;min-width:0}
+  .verdict .row>*{flex:1 1 0;min-width:0;display:flex;flex-wrap:wrap;align-items:baseline;column-gap:14px}
+  .verdict .row .nums{font-size:13px!important}
+  .verdict .row .nums .site{font-size:16px!important;padding:1px 8px!important}
+  /* demo 2: playback controls and the jump buttons share one row */
+  .box{display:flex;flex-wrap:wrap;align-items:center;column-gap:18px}
+  .box>*{flex:1 1 100%;min-width:0}
+  .box>.bar,.box>.jumps{flex:0 1 auto;margin:0 0 6px!important}
+  .bar label{font-size:0!important} .bar label b,.bar label select{font-size:12px!important;margin-left:6px}
+  .jumps{font-size:0!important} .jumps button,.jumps .btn{font-size:12px!important;padding:5px 10px!important}
   .bar{margin-bottom:4px!important}
   .jumps{margin-bottom:4px!important}
 }

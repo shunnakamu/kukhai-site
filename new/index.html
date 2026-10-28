@@ -69,6 +69,17 @@
     .demo-block__title { font-size: var(--text-lg); }
     .demo-frame iframe { height: 560px; }
   }
+  /* PC: the first screen shows the title, the demo buttons and all of demo 1 (中村 2026-10-28「スクロール無しで見えるように」) */
+  .demo-tabs { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-xs); }
+  .demo-tabs__note { font: 500 var(--text-xs) var(--font-outlier); letter-spacing: .08em; text-transform: uppercase; color: var(--color-muted);
+    border: var(--rule-hair) solid var(--color-rule); border-radius: var(--radius-pill); padding: 2px 10px; margin-inline-start: var(--space-xs); }
+  @media (min-width: 601px) {
+    .masthead .wordmark img { height: 3rem; }
+    .demo-hero { gap: var(--space-sm); padding-block: var(--space-sm) var(--space-xl); }
+    .demo-hero__title { font-size: clamp(1.5rem, 1vw + 1rem, 2.2rem); max-width: none; }
+    .demo-block { gap: var(--space-xs); scroll-margin-top: calc(var(--nav-h, 56px) + var(--space-xs)); }
+    .demo-block__title { font-size: var(--text-lg); }
+  }
   .demo-hero__after { display: grid; gap: var(--space-md); justify-items: start; max-width: var(--measure); }
 </style>
 </head>
@@ -100,25 +111,21 @@
 
     <section class="demo-hero reveal" style="--i: 1">
       <h1 class="demo-hero__title">Electra — <span class="accent">AI algorithm platform</span> for cardiac ablation</h1>
-      <p class="lede">Less repetitive work. More focus on clinical decisions.</p>
-
       <nav class="demo-tabs" aria-label="Demos">
         <a class="demo-tab" href="#demo1">Auto-read pacing response</a>
         <a class="demo-tab" href="#demo2">Live ablation tracking</a>
+        <span class="demo-tabs__note">Sample data</span>
       </nav>
 
       <div class="demo-block" id="demo1">
         <h2 class="demo-block__title">Reads the response to pacing, automatically</h2>
-        <p class="note">Groups the beats after pacing and measures the intervals.</p>
         <div class="demo-frame"><iframe scrolling="no" src="demo1/" title="Electra: automatic read of the pacing response" loading="eager"></iframe></div>
       </div>
 
       <div class="demo-block" id="demo2">
         <h2 class="demo-block__title">Tracks cycle length live during ablation</h2>
-        <p class="note">Tracks interval trends during ablation.</p>
         <div class="demo-frame"><iframe scrolling="no" src="demo2/" title="Electra: live cycle-length tracking during ablation" loading="lazy"></iframe></div>
       </div>
-      <p class="fine">Interactive demos on redrawn, illustrative signals.</p>
 
       <div class="demo-hero__after">
         <a class="chip" href="#contact"><span>Talk to us</span><span class="chip__arrow" aria-hidden="true">→</span></a>
@@ -257,6 +264,20 @@
   if (window.ResizeObserver && pill) new ResizeObserver(navHeight).observe(pill);
   // each demo page reports its height; fit its iframe to it
   var frames = Array.prototype.slice.call(document.querySelectorAll('.demo-frame iframe'));
+  // tell each demo how tall it may be to fit on screen: under its title when jumped to, and for demo 1 also from the top of the page
+  function budgets() {
+    frames.forEach(function (f) {
+      var blk = f.closest('.demo-block'); if (!blk || !f.contentWindow) return;
+      var sm = parseFloat(getComputedStyle(blk).scrollMarginTop) || 0;
+      var under = f.getBoundingClientRect().top - blk.getBoundingClientRect().top;
+      var b = window.innerHeight - sm - under - 12;
+      if (blk.id === 'demo1') b = Math.min(b, window.innerHeight - (f.getBoundingClientRect().top + window.scrollY) - 12);
+      try { f.contentWindow.postMessage({ kukhaiBudget: Math.round(b) }, '*'); } catch (e) {}
+    });
+  }
+  frames.forEach(function (f) { f.addEventListener('load', budgets); });
+  window.addEventListener('resize', budgets);
+  setTimeout(budgets, 300);
   window.addEventListener('message', function (e) {
     var h = e.data && e.data.kukhaiDemoHeight;
     frames.forEach(function (f) { if (e.source === f.contentWindow && h > 200) f.style.height = Math.ceil(h) + 'px'; });
