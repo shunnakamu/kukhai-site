@@ -1,0 +1,276 @@
+<!doctype html>
+<!-- purpose: exempt — 公開 Web サイト本体（資料ではない）。目的と読み手は s2i_ecg_fm docs/strategy/2026-10-27-website-update-plan.md -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>KUχAI — Electra, AI algorithm platform for cardiac ablation</title>
+<meta name="description" content="Electra is an AI algorithm platform for cardiac ablation, designed to run inside the EP workstation: automated measurement, labeling and signal selection, with findings linked to the original signals.">
+<link rel="icon" href="../assets/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../assets/favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../assets/apple-touch-icon.png">
+<meta name="theme-color" content="#090E18">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@350;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<style>
+  .demo-tabs { display: flex; gap: var(--space-xs); flex-wrap: wrap; }
+  .demo-tab { font: 500 var(--text-sm) var(--font-body); color: var(--color-muted); background: transparent; cursor: pointer;
+    border: var(--rule-hair) solid var(--color-edge); border-radius: var(--radius-pill); padding: var(--space-xs) var(--space-md); min-height: 44px; }
+  .demo-tab[aria-selected="true"] { color: var(--color-paper); background: var(--color-accent); border-color: var(--color-accent); }
+  .stats { display: grid; gap: var(--space-lg); grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); }
+  .stat { display: grid; gap: var(--space-2xs); align-content: start; border-block-start: var(--rule-hair) solid var(--color-rule); padding-block-start: var(--space-md); }
+  .stat__num { font: 700 var(--text-3xl)/1 var(--font-display); color: var(--color-accent); letter-spacing: -.02em; }
+  .stat__label { color: var(--color-ink); max-width: 34ch; }
+  .stat__sub { color: var(--color-muted); font-size: var(--text-sm); max-width: 34ch; }
+  .fine { color: var(--color-neutral); font-size: var(--text-xs); max-width: var(--measure); line-height: 1.6; }
+  .partners { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-sm); grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); }
+  .partners li { border: var(--rule-hair) solid var(--color-rule); border-radius: var(--radius-md); padding: var(--space-md); color: var(--color-ink); }
+  .partners small { display: block; color: var(--color-muted); margin-top: var(--space-2xs); }
+  /* demo first on narrow screens (中村さん「デモをサイトの一番上に出す」) */
+  @media (max-width: 860px) { .hero .figure { order: -1; } }
+</style>
+</head>
+<body>
+
+<div class="shell">
+
+  <header class="masthead reveal" style="--i: 0">
+    <a class="wordmark" href="#top" aria-label="KUχAI"><img src="../assets/kukhai-wordmark.png" alt="KUχAI" width="720" height="322" fetchpriority="high"></a>
+    <div class="masthead__actions">
+      <a class="chip chip--nav" href="#contact"><span>Contact</span><span class="chip__arrow" aria-hidden="true">→</span></a>
+    </div>
+  </header>
+
+  <nav class="pill reveal" style="--i: 1" aria-label="Sections">
+    <ul class="pill__tabs">
+      <li><a class="tab" href="#top">Product</a></li>
+      <li><a class="tab" href="#procedure">Technology</a></li>
+      <li><a class="tab" href="#where">Integration</a></li>
+      <li><a class="tab" href="#about">About</a></li>
+      <li><a class="tab" href="#team">Team</a></li>
+    </ul>
+  </nav>
+
+  <main id="top">
+
+    <section class="hero">
+      <div class="hero__body reveal" style="--i: 1">
+        <h1 class="hero__display">Electra — <span class="accent">AI algorithm platform</span> for cardiac ablation</h1>
+        <p class="lede">Less repetitive work. More focus on clinical decisions.</p>
+        <p class="note">Electra is designed to run inside the EP workstation, measuring, labeling and selecting intracardiac signals in real time — with results linked back to the original signals. The physician makes the call.</p>
+        <a class="chip" href="#contact"><span>Talk to us</span><span class="chip__arrow" aria-hidden="true">→</span></a>
+      </div>
+
+      <figure class="figure reveal" style="--i: 2">
+        <div class="demo-tabs" role="tablist" aria-label="Demos">
+          <button class="demo-tab" role="tab" aria-selected="true" type="button">Pacing response</button>
+          <button class="demo-tab" role="tab" aria-selected="false" type="button">Linear ablation</button>
+        </div>
+        <div class="scope">
+          <svg viewBox="0 0 672 260" role="img" aria-labelledby="scope-title scope-desc" preserveAspectRatio="xMidYMid meet">
+            <title id="scope-title">Two signal traces, annotated</title>
+            <desc id="scope-desc">A surface ECG trace above an intracardiac electrogram trace; vertical marks sit on each intracardiac deflection.</desc>
+
+            <path class="wave wave--surface" d="M0 74.0 L0.0 74.0 L10.0 74.0 L16.0 70.0 L22.0 74.0 L30.0 74.0 L34.0 77.0 L38.0 40.0 L44.0 88.0 L48.0 74.0 L60.0 74.0 L70.0 65.0 L80.0 74.0 L96.0 74.0 L106.0 74.0 L112.0 70.0 L118.0 74.0 L126.0 74.0 L130.0 77.0 L134.0 40.0 L140.0 88.0 L144.0 74.0 L156.0 74.0 L166.0 65.0 L176.0 74.0 L192.0 74.0 L202.0 74.0 L208.0 70.0 L214.0 74.0 L222.0 74.0 L226.0 77.0 L230.0 40.0 L236.0 88.0 L240.0 74.0 L252.0 74.0 L262.0 65.0 L272.0 74.0 L288.0 74.0 L298.0 74.0 L304.0 70.0 L310.0 74.0 L318.0 74.0 L322.0 77.0 L326.0 40.0 L332.0 88.0 L336.0 74.0 L348.0 74.0 L358.0 65.0 L368.0 74.0 L384.0 74.0 L394.0 74.0 L400.0 70.0 L406.0 74.0 L414.0 74.0 L418.0 77.0 L422.0 40.0 L428.0 88.0 L432.0 74.0 L444.0 74.0 L454.0 65.0 L464.0 74.0 L480.0 74.0 L490.0 74.0 L496.0 70.0 L502.0 74.0 L510.0 74.0 L514.0 77.0 L518.0 40.0 L524.0 88.0 L528.0 74.0 L540.0 74.0 L550.0 65.0 L560.0 74.0 L576.0 74.0 L586.0 74.0 L592.0 70.0 L598.0 74.0 L606.0 74.0 L610.0 77.0 L614.0 40.0 L620.0 88.0 L624.0 74.0 L636.0 74.0 L646.0 65.0 L656.0 74.0 L672.0 74.0"></path>
+
+            <path class="wave wave--egm" d="M0 190.0 L12.0 190.0 L15.0 184.0 L18.0 190.0 L26.0 190.0 L30.0 168.0 L33.0 210.0 L36.0 184.0 L40.0 190.0 L54.0 190.0 L58.0 195.0 L62.0 190.0 L96.0 190.0 L108.0 190.0 L111.0 184.0 L114.0 190.0 L122.0 190.0 L126.0 168.0 L129.0 210.0 L132.0 184.0 L136.0 190.0 L150.0 190.0 L154.0 195.0 L158.0 190.0 L192.0 190.0 L204.0 190.0 L207.0 184.0 L210.0 190.0 L218.0 190.0 L222.0 168.0 L225.0 210.0 L228.0 184.0 L232.0 190.0 L246.0 190.0 L250.0 195.0 L254.0 190.0 L288.0 190.0 L300.0 190.0 L303.0 184.0 L306.0 190.0 L314.0 190.0 L318.0 168.0 L321.0 210.0 L324.0 184.0 L328.0 190.0 L342.0 190.0 L346.0 195.0 L350.0 190.0 L384.0 190.0 L396.0 190.0 L399.0 184.0 L402.0 190.0 L410.0 190.0 L414.0 168.0 L417.0 210.0 L420.0 184.0 L424.0 190.0 L438.0 190.0 L442.0 195.0 L446.0 190.0 L480.0 190.0 L492.0 190.0 L495.0 184.0 L498.0 190.0 L506.0 190.0 L510.0 168.0 L513.0 210.0 L516.0 184.0 L520.0 190.0 L534.0 190.0 L538.0 195.0 L542.0 190.0 L576.0 190.0 L588.0 190.0 L591.0 184.0 L594.0 190.0 L602.0 190.0 L606.0 168.0 L609.0 210.0 L612.0 184.0 L616.0 190.0 L630.0 190.0 L634.0 195.0 L638.0 190.0 L672.0 190.0"></path>
+
+            <g class="tick" stroke-dasharray="3 5">
+              <line x1="30" y1="150" x2="30" y2="232"></line>
+              <line x1="126" y1="150" x2="126" y2="232"></line>
+              <line x1="222" y1="150" x2="222" y2="232"></line>
+              <line x1="318" y1="150" x2="318" y2="232"></line>
+              <line x1="414" y1="150" x2="414" y2="232"></line>
+              <line x1="510" y1="150" x2="510" y2="232"></line>
+              <line x1="606" y1="150" x2="606" y2="232"></line>
+            </g>
+            <g class="tick-cap">
+              <circle cx="30" cy="146" r="3.5"></circle>
+              <circle cx="126" cy="146" r="3.5"></circle>
+              <circle cx="222" cy="146" r="3.5"></circle>
+              <circle cx="318" cy="146" r="3.5"></circle>
+              <circle cx="414" cy="146" r="3.5"></circle>
+              <circle cx="510" cy="146" r="3.5"></circle>
+              <circle cx="606" cy="146" r="3.5"></circle>
+            </g>
+          </svg>
+        </div>
+        <p class="note" id="demo-text">Electra groups the beats after pacing, colors matching activations and measures the intervals. The physician checks them against the original signals.</p>
+        <figcaption>Illustrative signals</figcaption>
+      </figure>
+    </section>
+
+    <section id="problem" class="section section--tight reveal" style="--i: 3" aria-labelledby="h-problem">
+      <header class="head-hang">
+        <h2 id="h-problem">Complex ablation runs on manual signal analysis</h2>
+      </header>
+      <p class="lede">Much of the interval measurement, activation matching and channel review is still done by hand. In an illustrative four-hour complex case, about two hours go to diagnosis and manual analysis.</p>
+      <p class="note">We heard similar challenges from U.S. EP specialists in 2026. Atrial fibrillation recurs after ablation in 20–40% of patients.<sup>1</sup></p>
+      <p class="fine"><sup>1</sup> Mayo Clinic, June 2025; recurrence varies by population and follow-up. Time allocation is illustrative, not measured workflow data.</p>
+    </section>
+
+    <section id="procedure" class="section section--tight reveal" style="--i: 3" aria-labelledby="h-procedure">
+      <header class="head-hang">
+        <h2 id="h-procedure">What Electra is built to do</h2>
+        <p class="note">Evidence physicians can review.</p>
+      </header>
+      <ol class="steps">
+        <li class="step"><span class="step__stage">01</span><h3>Automated measurement</h3><p>Intervals, beat labels and signal selection.</p></li>
+        <li class="step"><span class="step__stage">02</span><h3>Changes over time</h3><p>Signal characteristics and interval trends across the procedure.</p></li>
+        <li class="step"><span class="step__stage">03</span><h3>Reviewable evidence</h3><p>Findings linked to the original signals.</p></li>
+      </ol>
+      <p class="note">Also in research: estimated signals where no catheter is recording, and lesion and line assessment.</p>
+    </section>
+
+    <section id="where" class="section reveal" style="--i: 4" aria-labelledby="h-where">
+      <div class="split">
+        <figure class="figure">
+          <div class="map">
+            <div class="map__group">
+              <p class="map__node">EP recording system</p>
+              <p class="map__node">3D mapping system</p>
+            </div>
+            <span class="map__arrow" aria-hidden="true"></span>
+            <p class="map__node map__node--core">Electra</p>
+            <span class="map__arrow" aria-hidden="true"></span>
+            <div class="map__group">
+              <p class="map__node">Measurements &amp; labels</p>
+              <p class="map__node">Selected signals &amp; trends</p>
+              <p class="map__node">Estimated signals · lesion &amp; line assessment (research)</p>
+            </div>
+          </div>
+          <figcaption>Signal path — results return to the workstation's own display</figcaption>
+        </figure>
+        <div class="split__text">
+          <header class="head-hang">
+            <h2 id="h-where">Inside your system, not a replacement for it</h2>
+          </header>
+          <p class="lede">Electra is designed to read the signals the lab already records and return results to the workstation's own display, in real time.</p>
+          <p class="note">We're looking for EP recording and mapping manufacturers — and the device and software companies that supply them — to partner through software licensing and joint development.</p>
+          <a class="chip" href="#contact"><span>Discuss integration</span><span class="chip__arrow" aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section section--tight reveal" style="--i: 5" aria-labelledby="h-about">
+      <header class="head-hang">
+        <h2 id="h-about">Clinical foundation</h2>
+      </header>
+      <div class="stats">
+        <div class="stat"><span class="stat__num">4,106</span><span class="stat__label">cases in our research dataset</span></div>
+        <div class="stat"><span class="stat__num">~15%</span><span class="stat__label">one-year recurrence after a first AF ablation at a single center</span><span class="stat__sub">Our clinical baseline, not an Electra result. 1,509 patients, ~70% paroxysmal / ~30% persistent.</span></div>
+        <div class="stat"><span class="stat__num">25%</span><span class="stat__label">less total procedure time in selected complex cases</span><span class="stat__sub">Development target, to be tested. Diagnosis and manual analysis 2 h → 1 h; total 4 h → 3 h.</span></div>
+      </div>
+      <p class="note">Validation goals: task time, measurement reliability and clinical quality.</p>
+      <p class="fine">Recurrence: retrospective data from a single Japanese academic center (Kaplan–Meier, 3-month blanking). The four-hour case and time targets are illustrative, not measured data. Electra is investigational software, not cleared by the FDA or any other regulator, and not available for clinical use.</p>
+    </section>
+
+    <section id="team" class="section section--tight reveal" style="--i: 6" aria-labelledby="h-team">
+      <header class="head-hang">
+        <h2 id="h-team">Clinical practice meets AI engineering</h2>
+      </header>
+      <ul class="team">
+        <li class="person">
+          <img class="person__photo" src="../assets/team/kohjitani.jpg" alt="" width="480" height="480" loading="lazy">
+          <span class="person__name">Hiro Kohjitani, MD, PhD</span>
+          <span class="person__role">Co-Founder / CEO</span>
+          <a class="person__link" href="https://www.linkedin.com/in/hirohiko-kohjitani" rel="noopener" aria-label="Hiro Kohjitani, MD, PhD on LinkedIn" title="Hiro Kohjitani, MD, PhD on LinkedIn"><svg class="icon-li" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"></path></svg></a>
+        </li>
+        <li class="person">
+          <img class="person__photo" src="../assets/team/nakamura.jpg" alt="" width="480" height="480" loading="lazy">
+          <span class="person__name">Shun Nakamura</span>
+          <span class="person__role">Co-Founder / CTO</span>
+          <a class="person__link" href="https://www.linkedin.com/in/shunsuke-nakamura" rel="noopener" aria-label="Shun Nakamura on LinkedIn" title="Shun Nakamura on LinkedIn"><svg class="icon-li" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"></path></svg></a>
+        </li>
+        <li class="person">
+          <img class="person__photo" src="../assets/team/yasuda.jpg" alt="" width="480" height="480" loading="lazy">
+          <span class="person__name">Akira Yasuda</span>
+          <span class="person__role">Business Lead</span>
+          <a class="person__link" href="https://www.linkedin.com/in/sayrendipity" rel="noopener" aria-label="Akira Yasuda on LinkedIn" title="Akira Yasuda on LinkedIn"><svg class="icon-li" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"></path></svg></a>
+        </li>
+      </ul>
+      <ol class="news">
+        <li class="news__item"><time class="news__date">2026</time><p class="news__text">Multicenter evaluation discussions underway in Japan.</p></li>
+        <li class="news__item"><time class="news__date" datetime="2026-10">Oct 2026</time><p class="news__text">JETRO J-StarX program at Mayo Clinic.</p></li>
+        <li class="news__item"><time class="news__date" datetime="2026-09">Sep 2026</time><p class="news__text"><a class="news__link" href="https://experiencehrx.com/hrx-live/pitch-competition/pitch-competition-semi-finalists/" rel="noopener">HRX Live 2026</a> semifinalist.</p></li>
+      </ol>
+    </section>
+
+    <section class="section section--tight reveal" style="--i: 7" id="contact" aria-labelledby="h-contact">
+      <header class="head-hang">
+        <h2 id="h-contact">Build and validate Electra with us</h2>
+      </header>
+      <ul class="partners">
+        <li>Equipment &amp; integration partners<small>EP recording and mapping manufacturers</small></li>
+        <li>Device &amp; software partners<small>Companies already supplying EP labs</small></li>
+        <li>Clinical &amp; research partners<small>Validate workflows and collaborate on research</small></li>
+        <li>Investors<small>Support clinical validation</small></li>
+      </ul>
+      <p class="note">Planned business model: software licensing + joint development with EP recording and mapping manufacturers.</p>
+      <div class="contact">
+        <div class="contact__rows">
+          <p class="contact__row"><span class="contact__key">Email</span><span class="contact__val"><a href="mailto:info@kukhai.ai">info@kukhai.ai</a></span></p>
+          <p class="contact__row"><span class="contact__key">Company</span><span class="contact__val">KUχAI (incorporation in progress) · Kyoto, Japan</span></p>
+        </div>
+      </div>
+      <p class="note">Our long-term aspiration: zero recurrence.</p>
+    </section>
+
+  </main>
+</div>
+
+<footer class="foot-stmt">
+  <div class="shell">
+    <p class="foot-stmt__line">Less repetitive work. More focus on clinical decisions.</p>
+    <div class="foot-stmt__meta">
+      <span>KUχAI · Electra — pronounced KOO-kai</span>
+      <a class="foot-stmt__li" href="https://www.linkedin.com/company/ku%CF%87ai/" rel="noopener" aria-label="KUχAI on LinkedIn" title="KUχAI on LinkedIn"><svg class="icon-li" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"></path></svg></a>
+      <span>© 2026 KUχAI</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var pill = document.querySelector('.pill');
+  function navHeight() {
+    if (!pill) return;
+    document.documentElement.style.setProperty('--nav-h', Math.ceil(pill.getBoundingClientRect().height) + 'px');
+  }
+  navHeight();
+  window.addEventListener('resize', navHeight);
+  if (window.ResizeObserver && pill) new ResizeObserver(navHeight).observe(pill);
+  var TEXT = [
+    'Electra groups the beats after pacing, colors matching activations and measures the intervals. The physician checks them against the original signals.',
+    'Electra plots each interval with its recent median trend, so changes during ablation stand out. The physician confirms them against the original signals.'
+  ];
+  var dtabs = Array.prototype.slice.call(document.querySelectorAll('.demo-tab'));
+  dtabs.forEach(function (t, i) {
+    t.addEventListener('click', function () {
+      dtabs.forEach(function (u) { u.setAttribute('aria-selected', 'false'); });
+      t.setAttribute('aria-selected', 'true');
+      document.getElementById('demo-text').textContent = TEXT[i];
+    });
+  });
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+  if (!tabs.length || !('IntersectionObserver' in window)) return;
+  var byId = {};
+  tabs.forEach(function (t) { byId[t.getAttribute('href').slice(1)] = t; });
+  var seen = {};
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) { seen[e.target.id] = e.isIntersecting ? e.intersectionRatio : 0; });
+    var best = null, bestRatio = 0;
+    Object.keys(seen).forEach(function (id) { if (seen[id] > bestRatio) { bestRatio = seen[id]; best = id; } });
+    tabs.forEach(function (t) { t.removeAttribute('aria-current'); });
+    if (best && byId[best]) byId[best].setAttribute('aria-current', 'true');
+  }, { rootMargin: '-40% 0px -50% 0px', threshold: [0, 0.25, 0.5, 1] });
+  Object.keys(byId).forEach(function (id) { var el = document.getElementById(id); if (el) io.observe(el); });
+})();
+</script>
+
+</body>
+</html>
