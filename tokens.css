@@ -1,35 +1,34 @@
-/* Hallmark · tokens · KUχAI (kukhai.ai)
- * Theme: Midnight, re-anchored to the KUχAI business-card palette.
- * Source of truth for the brand hexes: personal-hub/kukhai/business-cards/src_us/card.css
- *   navy #061126 · ivory #F5F1E6 · cyan #4FB8FF · cyan-deep #0068CB · gold #F5C842
- * Anchor hue: 261 (navy). Neutrals are tinted toward it.
+/* Hallmark · tokens · KUχAI (kukhai.ai/new)
+ * Theme: Midnight, re-anchored to the 2026-10-28 pitch deck (Revised 3x): black-navy ground, gold accent.
+ * Deck hexes: ground #090E18 · ink #F5F7FB · muted #B9C0CB / #A9ADB4 · gold #F6C927 / #F3C536
+ * (cyan #4FB8FF from the business cards is retired here.)
  */
 
 :root {
   /* ---- colour: paper (dark, elevation by lightness) ---- */
-  --color-paper:    oklch(18.1% 0.046 261);  /* #061126 — card navy */
-  --color-paper-2:  oklch(22.0% 0.040 261);
-  --color-paper-3:  oklch(26.0% 0.036 261);
-  --color-rule:     oklch(34.0% 0.030 261);  /* hairline dividers (decorative) */
-  --color-edge:     oklch(52.0% 0.030 261);  /* interactive boundaries — 3.4:1 on paper */
+  --color-paper:    #090E18;                 /* deck background */
+  --color-paper-2:  #10161F;
+  --color-paper-3:  #171D27;
+  --color-rule:     #2A303A;                 /* hairline dividers (decorative) */
+  --color-edge:     #6B717B;                 /* interactive boundaries */
 
   /* ---- colour: ink + neutrals ---- */
-  --color-ink:      oklch(95.8% 0.015 90);   /* #F5F1E6 — card ivory */
-  --color-muted:    oklch(76.0% 0.014 261);
-  --color-neutral:  oklch(62.0% 0.020 261);
+  --color-ink:      #F5F7FB;
+  --color-muted:    #B9C0CB;
+  --color-neutral:  #A9ADB4;
 
-  /* ---- colour: accent (one, plus a sparing signal) ---- */
-  --color-accent:      oklch(75.2% 0.140 242); /* #4FB8FF — card cyan */
-  --color-accent-deep: oklch(52.6% 0.173 255); /* #0068CB */
-  --color-signal:      oklch(85.0% 0.153 90);  /* #F5C842 — gold, point use only */
-  --color-focus:       oklch(80.0% 0.130 242);
+  /* ---- colour: accent (gold, from the deck) ---- */
+  --color-accent:      #F6C927;
+  --color-accent-deep: #C99A0E;
+  --color-signal:      #F3C536;
+  --color-focus:       #FFD95A;
 
-  /* atmospheric ground — two fixed blooms, no animation */
-  --color-bloom-1:     oklch(52.6% 0.173 255 / 0.20);
-  --color-bloom-2:     oklch(52.6% 0.173 255 / 0.13);
+  /* atmospheric ground — two fixed gold blooms, after the deck's light ribbon */
+  --color-bloom-1:     rgb(246 201 39 / 0.10);
+  --color-bloom-2:     rgb(246 201 39 / 0.06);
 
   /* sticky pill — 背後の波形が透けるが文字は読める濃さ */
-  --color-pill:        oklch(20.0% 0.042 261 / 0.82);
+  --color-pill:        rgb(13 18 27 / 0.85);
 
   /* ---- type ---- */
   --font-display:  "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
