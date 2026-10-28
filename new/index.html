@@ -49,6 +49,19 @@
   .demo-block { display: grid; gap: var(--space-sm); scroll-margin-top: calc(var(--nav-h, 64px) + var(--space-md)); }
   .demo-block + .demo-block { margin-top: var(--space-xl); }
   .demo-block__title { font: 700 var(--text-xl)/1.2 var(--font-display); margin: 0; color: var(--color-ink); }
+  /* below the wide layout the map stacks; the two input systems sit side by side (中村 2026-10-28) */
+  @media (max-width: 59.99rem) {
+    .map > .map__group:first-child { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  }
+  /* team: where each person comes from, as a monochrome logo under the name */
+  .person { grid-template-areas: "photo name link" "photo role link" "photo org link"; }
+  .person__org { grid-area: org; display: flex; align-items: center; gap: var(--space-2xs); margin-top: var(--space-3xs);
+    font: 500 var(--text-xs) var(--font-body); color: var(--color-muted); }
+  .person__org img { height: 18px; width: auto; filter: brightness(0) invert(1); opacity: .8; }
+  .person__org img[src*="kyoto"] { height: 30px; } /* emblem + two-line wordmark: needs more height to read */
+  @media (min-width: 60rem) {
+    .person { grid-template-areas: "photo name role link" "photo org role link"; }
+  }
   /* phone: title + demo on one screen */
   @media (max-width: 600px) {
     .demo-block { gap: var(--space-xs); scroll-margin-top: calc(var(--nav-h, 56px) + var(--space-xs)); }
@@ -90,20 +103,20 @@
       <p class="lede">Less repetitive work. More focus on clinical decisions.</p>
 
       <nav class="demo-tabs" aria-label="Demos">
-        <a class="demo-tab" href="#demo1">Demo 1 · Pacing response</a>
-        <a class="demo-tab" href="#demo2">Demo 2 · Linear ablation</a>
+        <a class="demo-tab" href="#demo1">Auto-read pacing response</a>
+        <a class="demo-tab" href="#demo2">Live ablation tracking</a>
       </nav>
 
       <div class="demo-block" id="demo1">
-        <h2 class="demo-block__title">Demo 1 — Pacing response</h2>
+        <h2 class="demo-block__title">Reads the response to pacing, automatically</h2>
         <p class="note">Groups the beats after pacing and measures the intervals.</p>
-        <div class="demo-frame"><iframe src="demo1/" title="Electra demo 1: pacing response" loading="eager"></iframe></div>
+        <div class="demo-frame"><iframe src="demo1/" title="Electra: automatic read of the pacing response" loading="eager"></iframe></div>
       </div>
 
       <div class="demo-block" id="demo2">
-        <h2 class="demo-block__title">Demo 2 — Linear ablation</h2>
+        <h2 class="demo-block__title">Tracks cycle length live during ablation</h2>
         <p class="note">Tracks interval trends during ablation.</p>
-        <div class="demo-frame"><iframe src="demo2/" title="Electra demo 2: linear ablation" loading="lazy"></iframe></div>
+        <div class="demo-frame"><iframe src="demo2/" title="Electra: live cycle-length tracking during ablation" loading="lazy"></iframe></div>
       </div>
       <p class="fine">Interactive demos on redrawn, illustrative signals.</p>
 
@@ -184,18 +197,21 @@
           <img class="person__photo" src="../assets/team/kohjitani.jpg" alt="" width="480" height="480" loading="lazy">
           <span class="person__name">Hiro Kohjitani, MD, PhD</span>
           <span class="person__role">Co-Founder / CEO</span>
+          <span class="person__org"><img src="../assets/logos/kyoto-university.svg" alt="Kyoto University" loading="lazy"></span>
           <a class="person__link" href="https://www.linkedin.com/in/hirohiko-kohjitani" rel="noopener" aria-label="Hiro Kohjitani, MD, PhD on LinkedIn" title="Hiro Kohjitani, MD, PhD on LinkedIn"><svg class="icon-li" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"></path></svg></a>
         </li>
         <li class="person">
           <img class="person__photo" src="../assets/team/nakamura.jpg" alt="" width="480" height="480" loading="lazy">
           <span class="person__name">Shun Nakamura</span>
           <span class="person__role">Co-Founder / CTO</span>
+          <span class="person__org"><span>Formerly</span><img src="../assets/logos/rakuten.svg" alt="Rakuten" loading="lazy"></span>
           <a class="person__link" href="https://www.linkedin.com/in/shunsuke-nakamura" rel="noopener" aria-label="Shun Nakamura on LinkedIn" title="Shun Nakamura on LinkedIn"><svg class="icon-li" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"></path></svg></a>
         </li>
         <li class="person">
           <img class="person__photo" src="../assets/team/yasuda.jpg" alt="" width="480" height="480" loading="lazy">
           <span class="person__name">Akira Yasuda</span>
           <span class="person__role">Business Lead</span>
+          <span class="person__org"><span>Formerly</span><img src="../assets/logos/ibm.svg" alt="IBM" loading="lazy"></span>
           <a class="person__link" href="https://www.linkedin.com/in/sayrendipity" rel="noopener" aria-label="Akira Yasuda on LinkedIn" title="Akira Yasuda on LinkedIn"><svg class="icon-li" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"></path></svg></a>
         </li>
       </ul>

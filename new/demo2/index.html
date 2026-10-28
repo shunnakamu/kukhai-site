@@ -364,7 +364,18 @@ draw();
 
 <script>
 (function(){
-  try { setTimeout(function(){ if (typeof setPlaying === 'function' && !playing) setPlaying(true); }, 600); } catch (e) {}
+  // play only while the demo is on screen (中村 2026-10-28: start when scrolled into view, not on page load).
+  // An IntersectionObserver inside the iframe measures against the top-level viewport.
+  var autoPaused = false;
+  function vis(on){ try {
+    if (typeof setPlaying !== 'function') return;
+    if (on && !playing && (autoPaused || !vis.started)) { vis.started = true; autoPaused = false; setPlaying(true); }
+    else if (!on && playing) { autoPaused = true; setPlaying(false); }
+  } catch (e) {} }
+  if (window.IntersectionObserver) {
+    new IntersectionObserver(function(es){ es.forEach(function(e){ vis(e.intersectionRatio >= 0.5); }); },
+      {threshold: [0, 0.5, 1]}).observe(document.querySelector('.app') || document.body);
+  } else { setTimeout(function(){ vis(true); }, 600); }
   // the content's own height: documentElement.scrollHeight never drops below the iframe, so the frame could only grow
   function report(){ try { var a = document.querySelector('.app') || document.body;
     parent.postMessage({kukhaiDemoHeight: Math.ceil(a.getBoundingClientRect().bottom + window.scrollY)}, '*'); } catch (e) {} }
