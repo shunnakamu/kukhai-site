@@ -366,8 +366,18 @@ draw();
 (function(){
   // play only while the demo is on screen (中村 2026-10-28: start when scrolled into view, not on page load).
   // An IntersectionObserver inside the iframe measures against the top-level viewport.
-  var autoPaused = false;
+  var autoPaused = false, onScreen = false;
+  // demo 2: after it plays to the end, wait a few seconds and start again from the beginning (中村 2026-10-28)
+  try { if (typeof T_END !== 'undefined' && typeof setPlaying === 'function' && document.getElementById('wv')) {
+    var setPlaying0 = setPlaying;
+    setPlaying = function(p){ setPlaying0(p);
+      if (!p && NOW >= T_END) setTimeout(function(){
+        if (playing || NOW < T_END) return;            // someone moved or restarted it meanwhile
+        if (onScreen) setPlaying(true); else autoPaused = true;   // setPlaying(true) rewinds to 0 at the end
+      }, 5000); };
+  } } catch (e) {}
   function vis(on){ try {
+    onScreen = on;
     if (typeof setPlaying !== 'function') return;
     if (on && !playing && (autoPaused || !vis.started)) { vis.started = true; autoPaused = false; setPlaying(true); }
     else if (!on && playing) { autoPaused = true; setPlaying(false); }
