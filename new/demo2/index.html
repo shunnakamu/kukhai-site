@@ -387,6 +387,22 @@ draw();
 /* the parent sizes the iframe to the content, so the frame never needs its own scrollbar (中村 2026-10-28「ダサい」) */
 html,body{overflow:hidden!important;scrollbar-width:none}
 html::-webkit-scrollbar,body::-webkit-scrollbar{display:none}
+/* every width: the demo fits one screen, PC included (中村 2026-10-28「PCでみると収まってない」).
+   No vh here: the iframe's height follows the content, so vh would feed back into itself. */
+.verdict{padding:12px 20px!important;margin-bottom:10px!important}
+.verdict .big{font-size:clamp(1.3rem,2.2vw,2rem)!important}
+.verdict .why,.verdict .why b{display:none!important}
+.verdict .nums{margin-top:4px!important}
+.steps,.now{display:none!important}
+#cv,#wv{max-height:360px;width:auto!important;max-width:100%;margin-inline:auto}
+#wv{max-height:200px}
+.box canvas#cv{max-height:200px}
+@media (min-width:700px){
+  .verdict .row{flex-wrap:nowrap!important;gap:16px 40px!important}
+  .verdict .row>*{flex:1 1 0;min-width:0}
+  .bar{margin-bottom:4px!important}
+  .jumps{margin-bottom:4px!important}
+}
 /* phone: the whole demo fits one screen (中村 2026-10-28「1画面でデモが完結するように」).
    Keep the answer, the signals and the controls; drop the explanations, stat tiles and legends. */
 @media (max-width:600px){
