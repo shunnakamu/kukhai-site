@@ -30,8 +30,13 @@
   .partners { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-sm); grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); }
   .partners li { border: var(--rule-hair) solid var(--color-rule); border-radius: var(--radius-md); padding: var(--space-md); color: var(--color-ink); }
   .partners small { display: block; color: var(--color-muted); margin-top: var(--space-2xs); }
-  /* demo first on narrow screens (中村さん「デモをサイトの一番上に出す」) */
-  @media (max-width: 860px) { .hero .figure { order: -1; } }
+  /* デモをサイトの一番上に、ページ幅いっぱいで（中村さん 2026-10-28） */
+  .demo-hero { display: grid; gap: var(--space-md); padding-block: var(--space-xl) var(--space-2xl); }
+  .demo-hero__title { font: 700 clamp(1.9rem, 3vw + 1rem, 3.2rem)/1.08 var(--font-display); letter-spacing: -.03em; margin: 0; max-width: 24ch; color: var(--color-ink); }
+  .demo-hero__title .accent { color: var(--color-accent); }
+  .demo-frame { border: var(--rule-hair) solid var(--color-rule); border-radius: var(--radius-md); overflow: hidden; background: var(--color-paper); }
+  .demo-frame iframe { display: block; width: 100%; height: 1020px; border: 0; }
+  .demo-hero__after { display: grid; gap: var(--space-md); justify-items: start; max-width: var(--measure); }
 </style>
 </head>
 <body>
@@ -57,51 +62,24 @@
 
   <main id="top">
 
-    <section class="hero">
-      <div class="hero__body reveal" style="--i: 1">
-        <h1 class="hero__display">Electra — <span class="accent">AI algorithm platform</span> for cardiac ablation</h1>
-        <p class="lede">Less repetitive work. More focus on clinical decisions.</p>
+    <section class="demo-hero reveal" style="--i: 1">
+      <h1 class="demo-hero__title">Electra — <span class="accent">AI algorithm platform</span> for cardiac ablation</h1>
+      <p class="lede">Less repetitive work. More focus on clinical decisions.</p>
+
+      <div class="demo-tabs" role="tablist" aria-label="Demos">
+        <button class="demo-tab" role="tab" aria-selected="true" type="button" data-src="demo1/">Pacing response</button>
+        <button class="demo-tab" role="tab" aria-selected="false" type="button" data-src="demo2/">Linear ablation</button>
+      </div>
+      <p class="note" id="demo-text">Electra groups the beats after pacing, colors matching activations and measures the intervals. The physician checks them against the original signals.</p>
+      <div class="demo-frame">
+        <iframe id="demo-frame" src="demo1/" title="Electra interactive demo" loading="eager"></iframe>
+      </div>
+      <p class="fine">Interactive demo on redrawn, illustrative signals.</p>
+
+      <div class="demo-hero__after">
         <p class="note">Electra is designed to run inside the EP workstation, measuring, labeling and selecting intracardiac signals in real time — with results linked back to the original signals. The physician makes the call.</p>
         <a class="chip" href="#contact"><span>Talk to us</span><span class="chip__arrow" aria-hidden="true">→</span></a>
       </div>
-
-      <figure class="figure reveal" style="--i: 2">
-        <div class="demo-tabs" role="tablist" aria-label="Demos">
-          <button class="demo-tab" role="tab" aria-selected="true" type="button">Pacing response</button>
-          <button class="demo-tab" role="tab" aria-selected="false" type="button">Linear ablation</button>
-        </div>
-        <div class="scope">
-          <svg viewBox="0 0 672 260" role="img" aria-labelledby="scope-title scope-desc" preserveAspectRatio="xMidYMid meet">
-            <title id="scope-title">Two signal traces, annotated</title>
-            <desc id="scope-desc">A surface ECG trace above an intracardiac electrogram trace; vertical marks sit on each intracardiac deflection.</desc>
-
-            <path class="wave wave--surface" d="M0 74.0 L0.0 74.0 L10.0 74.0 L16.0 70.0 L22.0 74.0 L30.0 74.0 L34.0 77.0 L38.0 40.0 L44.0 88.0 L48.0 74.0 L60.0 74.0 L70.0 65.0 L80.0 74.0 L96.0 74.0 L106.0 74.0 L112.0 70.0 L118.0 74.0 L126.0 74.0 L130.0 77.0 L134.0 40.0 L140.0 88.0 L144.0 74.0 L156.0 74.0 L166.0 65.0 L176.0 74.0 L192.0 74.0 L202.0 74.0 L208.0 70.0 L214.0 74.0 L222.0 74.0 L226.0 77.0 L230.0 40.0 L236.0 88.0 L240.0 74.0 L252.0 74.0 L262.0 65.0 L272.0 74.0 L288.0 74.0 L298.0 74.0 L304.0 70.0 L310.0 74.0 L318.0 74.0 L322.0 77.0 L326.0 40.0 L332.0 88.0 L336.0 74.0 L348.0 74.0 L358.0 65.0 L368.0 74.0 L384.0 74.0 L394.0 74.0 L400.0 70.0 L406.0 74.0 L414.0 74.0 L418.0 77.0 L422.0 40.0 L428.0 88.0 L432.0 74.0 L444.0 74.0 L454.0 65.0 L464.0 74.0 L480.0 74.0 L490.0 74.0 L496.0 70.0 L502.0 74.0 L510.0 74.0 L514.0 77.0 L518.0 40.0 L524.0 88.0 L528.0 74.0 L540.0 74.0 L550.0 65.0 L560.0 74.0 L576.0 74.0 L586.0 74.0 L592.0 70.0 L598.0 74.0 L606.0 74.0 L610.0 77.0 L614.0 40.0 L620.0 88.0 L624.0 74.0 L636.0 74.0 L646.0 65.0 L656.0 74.0 L672.0 74.0"></path>
-
-            <path class="wave wave--egm" d="M0 190.0 L12.0 190.0 L15.0 184.0 L18.0 190.0 L26.0 190.0 L30.0 168.0 L33.0 210.0 L36.0 184.0 L40.0 190.0 L54.0 190.0 L58.0 195.0 L62.0 190.0 L96.0 190.0 L108.0 190.0 L111.0 184.0 L114.0 190.0 L122.0 190.0 L126.0 168.0 L129.0 210.0 L132.0 184.0 L136.0 190.0 L150.0 190.0 L154.0 195.0 L158.0 190.0 L192.0 190.0 L204.0 190.0 L207.0 184.0 L210.0 190.0 L218.0 190.0 L222.0 168.0 L225.0 210.0 L228.0 184.0 L232.0 190.0 L246.0 190.0 L250.0 195.0 L254.0 190.0 L288.0 190.0 L300.0 190.0 L303.0 184.0 L306.0 190.0 L314.0 190.0 L318.0 168.0 L321.0 210.0 L324.0 184.0 L328.0 190.0 L342.0 190.0 L346.0 195.0 L350.0 190.0 L384.0 190.0 L396.0 190.0 L399.0 184.0 L402.0 190.0 L410.0 190.0 L414.0 168.0 L417.0 210.0 L420.0 184.0 L424.0 190.0 L438.0 190.0 L442.0 195.0 L446.0 190.0 L480.0 190.0 L492.0 190.0 L495.0 184.0 L498.0 190.0 L506.0 190.0 L510.0 168.0 L513.0 210.0 L516.0 184.0 L520.0 190.0 L534.0 190.0 L538.0 195.0 L542.0 190.0 L576.0 190.0 L588.0 190.0 L591.0 184.0 L594.0 190.0 L602.0 190.0 L606.0 168.0 L609.0 210.0 L612.0 184.0 L616.0 190.0 L630.0 190.0 L634.0 195.0 L638.0 190.0 L672.0 190.0"></path>
-
-            <g class="tick" stroke-dasharray="3 5">
-              <line x1="30" y1="150" x2="30" y2="232"></line>
-              <line x1="126" y1="150" x2="126" y2="232"></line>
-              <line x1="222" y1="150" x2="222" y2="232"></line>
-              <line x1="318" y1="150" x2="318" y2="232"></line>
-              <line x1="414" y1="150" x2="414" y2="232"></line>
-              <line x1="510" y1="150" x2="510" y2="232"></line>
-              <line x1="606" y1="150" x2="606" y2="232"></line>
-            </g>
-            <g class="tick-cap">
-              <circle cx="30" cy="146" r="3.5"></circle>
-              <circle cx="126" cy="146" r="3.5"></circle>
-              <circle cx="222" cy="146" r="3.5"></circle>
-              <circle cx="318" cy="146" r="3.5"></circle>
-              <circle cx="414" cy="146" r="3.5"></circle>
-              <circle cx="510" cy="146" r="3.5"></circle>
-              <circle cx="606" cy="146" r="3.5"></circle>
-            </g>
-          </svg>
-        </div>
-        <p class="note" id="demo-text">Electra groups the beats after pacing, colors matching activations and measures the intervals. The physician checks them against the original signals.</p>
-        <figcaption>Illustrative signals</figcaption>
-      </figure>
     </section>
 
     <section id="problem" class="section section--tight reveal" style="--i: 3" aria-labelledby="h-problem">
@@ -248,13 +226,20 @@
     'Electra groups the beats after pacing, colors matching activations and measures the intervals. The physician checks them against the original signals.',
     'Electra plots each interval with its recent median trend, so changes during ablation stand out. The physician confirms them against the original signals.'
   ];
+  var frame = document.getElementById('demo-frame');
   var dtabs = Array.prototype.slice.call(document.querySelectorAll('.demo-tab'));
   dtabs.forEach(function (t, i) {
     t.addEventListener('click', function () {
       dtabs.forEach(function (u) { u.setAttribute('aria-selected', 'false'); });
       t.setAttribute('aria-selected', 'true');
       document.getElementById('demo-text').textContent = TEXT[i];
+      if (frame.getAttribute('src') !== t.dataset.src) frame.setAttribute('src', t.dataset.src);
     });
+  });
+  // the demo page reports its height; fit the iframe to it
+  window.addEventListener('message', function (e) {
+    var h = e.data && e.data.kukhaiDemoHeight;
+    if (e.source === frame.contentWindow && h > 200) frame.style.height = Math.ceil(h) + 'px';
   });
   var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
   if (!tabs.length || !('IntersectionObserver' in window)) return;
