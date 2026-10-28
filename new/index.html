@@ -36,6 +36,11 @@
   .demo-hero__title .accent { color: var(--color-accent); }
   .demo-frame { border: var(--rule-hair) solid var(--color-rule); border-radius: var(--radius-md); overflow: hidden; background: var(--color-paper); }
   .demo-frame iframe { display: block; width: 100%; height: 1020px; border: 0; }
+  a.demo-tab { text-decoration: none; display: inline-flex; align-items: center; }
+  a.demo-tab:hover, a.demo-tab:focus-visible { color: var(--color-paper); background: var(--color-accent); border-color: var(--color-accent); }
+  .demo-block { display: grid; gap: var(--space-sm); scroll-margin-top: calc(var(--nav-h, 64px) + var(--space-md)); }
+  .demo-block + .demo-block { margin-top: var(--space-xl); }
+  .demo-block__title { font: 700 var(--text-xl)/1.2 var(--font-display); margin: 0; color: var(--color-ink); }
   .demo-hero__after { display: grid; gap: var(--space-md); justify-items: start; max-width: var(--measure); }
 </style>
 </head>
@@ -66,15 +71,23 @@
       <h1 class="demo-hero__title">Electra — <span class="accent">AI algorithm platform</span> for cardiac ablation</h1>
       <p class="lede">Less repetitive work. More focus on clinical decisions.</p>
 
-      <div class="demo-tabs" role="tablist" aria-label="Demos">
-        <button class="demo-tab" role="tab" aria-selected="true" type="button" data-src="demo1/">Pacing response</button>
-        <button class="demo-tab" role="tab" aria-selected="false" type="button" data-src="demo2/">Linear ablation</button>
+      <nav class="demo-tabs" aria-label="Demos">
+        <a class="demo-tab" href="#demo1">Demo 1 · Pacing response</a>
+        <a class="demo-tab" href="#demo2">Demo 2 · Linear ablation</a>
+      </nav>
+
+      <div class="demo-block" id="demo1">
+        <h2 class="demo-block__title">Demo 1 — Pacing response</h2>
+        <p class="note">Electra groups the beats after pacing, colors matching activations and measures the intervals. The physician checks them against the original signals.</p>
+        <div class="demo-frame"><iframe src="demo1/" title="Electra demo 1: pacing response" loading="eager"></iframe></div>
       </div>
-      <p class="note" id="demo-text">Electra groups the beats after pacing, colors matching activations and measures the intervals. The physician checks them against the original signals.</p>
-      <div class="demo-frame">
-        <iframe id="demo-frame" src="demo1/" title="Electra interactive demo" loading="eager"></iframe>
+
+      <div class="demo-block" id="demo2">
+        <h2 class="demo-block__title">Demo 2 — Linear ablation</h2>
+        <p class="note">Electra plots each interval with its recent median trend, so changes during ablation stand out. The physician confirms them against the original signals.</p>
+        <div class="demo-frame"><iframe src="demo2/" title="Electra demo 2: linear ablation" loading="lazy"></iframe></div>
       </div>
-      <p class="fine">Interactive demo on redrawn, illustrative signals.</p>
+      <p class="fine">Interactive demos on redrawn, illustrative signals.</p>
 
       <div class="demo-hero__after">
         <p class="note">Electra is designed to run inside the EP workstation, measuring, labeling and selecting intracardiac signals in real time — with results linked back to the original signals. The physician makes the call.</p>
@@ -226,20 +239,11 @@
     'Electra groups the beats after pacing, colors matching activations and measures the intervals. The physician checks them against the original signals.',
     'Electra plots each interval with its recent median trend, so changes during ablation stand out. The physician confirms them against the original signals.'
   ];
-  var frame = document.getElementById('demo-frame');
-  var dtabs = Array.prototype.slice.call(document.querySelectorAll('.demo-tab'));
-  dtabs.forEach(function (t, i) {
-    t.addEventListener('click', function () {
-      dtabs.forEach(function (u) { u.setAttribute('aria-selected', 'false'); });
-      t.setAttribute('aria-selected', 'true');
-      document.getElementById('demo-text').textContent = TEXT[i];
-      if (frame.getAttribute('src') !== t.dataset.src) frame.setAttribute('src', t.dataset.src);
-    });
-  });
-  // the demo page reports its height; fit the iframe to it
+  // each demo page reports its height; fit its iframe to it
+  var frames = Array.prototype.slice.call(document.querySelectorAll('.demo-frame iframe'));
   window.addEventListener('message', function (e) {
     var h = e.data && e.data.kukhaiDemoHeight;
-    if (e.source === frame.contentWindow && h > 200) frame.style.height = Math.ceil(h) + 'px';
+    frames.forEach(function (f) { if (e.source === f.contentWindow && h > 200) f.style.height = Math.ceil(h) + 'px'; });
   });
   var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
   if (!tabs.length || !('IntersectionObserver' in window)) return;
