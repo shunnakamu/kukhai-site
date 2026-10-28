@@ -27,6 +27,14 @@
   .stat__label { color: var(--color-ink); max-width: 34ch; }
   .stat__sub { color: var(--color-muted); font-size: var(--text-sm); max-width: 34ch; }
   .fine { color: var(--color-neutral); font-size: var(--text-xs); max-width: var(--measure); line-height: 1.6; }
+  .cta-simple { display: grid; gap: var(--space-md); justify-items: start; max-width: 46rem; }
+  .cta-simple h2 { font: 700 var(--text-2xl)/1.1 var(--font-display); letter-spacing: -.02em; margin: 0; color: var(--color-ink); }
+  .cta-mail { font: 600 var(--text-lg)/1 var(--font-body); color: var(--color-paper); background: var(--color-accent); border-radius: var(--radius-pill);
+    padding: var(--space-sm) var(--space-lg); min-height: 44px; display: inline-flex; align-items: center; gap: var(--space-xs); text-decoration: none; }
+  .cta-mail:hover, .cta-mail:focus-visible { background: var(--color-focus); }
+  .cta-mail:focus-visible { outline: 2px solid var(--color-ink); outline-offset: 3px; }
+  .wordmark-wrap { display: flex; align-items: baseline; gap: var(--space-sm); flex-wrap: wrap; }
+  .pronounce { font: 500 var(--text-sm) var(--font-outlier); color: var(--color-muted); letter-spacing: .04em; white-space: nowrap; }
   .partners { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-sm); grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); }
   .partners li { border: var(--rule-hair) solid var(--color-rule); border-radius: var(--radius-md); padding: var(--space-md); color: var(--color-ink); }
   .partners small { display: block; color: var(--color-muted); margin-top: var(--space-2xs); }
@@ -41,6 +49,13 @@
   .demo-block { display: grid; gap: var(--space-sm); scroll-margin-top: calc(var(--nav-h, 64px) + var(--space-md)); }
   .demo-block + .demo-block { margin-top: var(--space-xl); }
   .demo-block__title { font: 700 var(--text-xl)/1.2 var(--font-display); margin: 0; color: var(--color-ink); }
+  /* phone: title + demo on one screen */
+  @media (max-width: 600px) {
+    .demo-block { gap: var(--space-xs); scroll-margin-top: calc(var(--nav-h, 56px) + var(--space-xs)); }
+    .demo-block .note { display: none; }
+    .demo-block__title { font-size: var(--text-lg); }
+    .demo-frame iframe { height: 560px; }
+  }
   .demo-hero__after { display: grid; gap: var(--space-md); justify-items: start; max-width: var(--measure); }
 </style>
 </head>
@@ -49,7 +64,10 @@
 <div class="shell">
 
   <header class="masthead reveal" style="--i: 0">
-    <a class="wordmark" href="#top" aria-label="KUχAI"><img src="../assets/kukhai-wordmark.png" alt="KUχAI" width="720" height="322" fetchpriority="high"></a>
+    <div class="wordmark-wrap">
+      <a class="wordmark" href="#top" aria-label="KUχAI"><img src="../assets/kukhai-wordmark.png" alt="KUχAI" width="720" height="322" fetchpriority="high"></a>
+      <span class="pronounce">Pronounced KOO-kai</span>
+    </div>
     <div class="masthead__actions">
       <a class="chip chip--nav" href="#contact"><span>Contact</span><span class="chip__arrow" aria-hidden="true">→</span></a>
     </div>
@@ -78,19 +96,18 @@
 
       <div class="demo-block" id="demo1">
         <h2 class="demo-block__title">Demo 1 — Pacing response</h2>
-        <p class="note">Electra groups the beats after pacing, colors matching activations and measures the intervals. The physician checks them against the original signals.</p>
+        <p class="note">Groups the beats after pacing and measures the intervals.</p>
         <div class="demo-frame"><iframe src="demo1/" title="Electra demo 1: pacing response" loading="eager"></iframe></div>
       </div>
 
       <div class="demo-block" id="demo2">
         <h2 class="demo-block__title">Demo 2 — Linear ablation</h2>
-        <p class="note">Electra plots each interval with its recent median trend, so changes during ablation stand out. The physician confirms them against the original signals.</p>
+        <p class="note">Tracks interval trends during ablation.</p>
         <div class="demo-frame"><iframe src="demo2/" title="Electra demo 2: linear ablation" loading="lazy"></iframe></div>
       </div>
       <p class="fine">Interactive demos on redrawn, illustrative signals.</p>
 
       <div class="demo-hero__after">
-        <p class="note">Electra is designed to run inside the EP workstation, measuring, labeling and selecting intracardiac signals in real time — with results linked back to the original signals. The physician makes the call.</p>
         <a class="chip" href="#contact"><span>Talk to us</span><span class="chip__arrow" aria-hidden="true">→</span></a>
       </div>
     </section>
@@ -99,22 +116,21 @@
       <header class="head-hang">
         <h2 id="h-problem">Complex ablation runs on manual signal analysis</h2>
       </header>
-      <p class="lede">Much of the interval measurement, activation matching and channel review is still done by hand. In an illustrative four-hour complex case, about two hours go to diagnosis and manual analysis.</p>
-      <p class="note">We heard similar challenges from U.S. EP specialists in 2026. Atrial fibrillation recurs after ablation in 20–40% of patients.<sup>1</sup></p>
-      <p class="fine"><sup>1</sup> Mayo Clinic, June 2025; recurrence varies by population and follow-up. Time allocation is illustrative, not measured workflow data.</p>
+      <p class="lede">Interval measurement, activation matching and channel review are still done by hand — about two of four hours in a complex case.</p>
+      <p class="note">AF recurs after ablation in 20–40% of patients.<sup>1</sup></p>
+      <p class="fine"><sup>1</sup> Mayo Clinic, June 2025. Time split is illustrative.</p>
     </section>
 
     <section id="procedure" class="section section--tight reveal" style="--i: 3" aria-labelledby="h-procedure">
       <header class="head-hang">
         <h2 id="h-procedure">What Electra is built to do</h2>
-        <p class="note">Evidence physicians can review.</p>
       </header>
       <ol class="steps">
         <li class="step"><span class="step__stage">01</span><h3>Automated measurement</h3><p>Intervals, beat labels and signal selection.</p></li>
-        <li class="step"><span class="step__stage">02</span><h3>Changes over time</h3><p>Signal characteristics and interval trends across the procedure.</p></li>
+        <li class="step"><span class="step__stage">02</span><h3>Changes over time</h3><p>Interval trends across the procedure.</p></li>
         <li class="step"><span class="step__stage">03</span><h3>Reviewable evidence</h3><p>Findings linked to the original signals.</p></li>
       </ol>
-      <p class="note">Also in research: estimated signals where no catheter is recording, and lesion and line assessment.</p>
+      <p class="note">In research: estimated signals, lesion and line assessment.</p>
     </section>
 
     <section id="where" class="section reveal" style="--i: 4" aria-labelledby="h-where">
@@ -140,8 +156,8 @@
           <header class="head-hang">
             <h2 id="h-where">Inside your system, not a replacement for it</h2>
           </header>
-          <p class="lede">Electra is designed to read the signals the lab already records and return results to the workstation's own display, in real time.</p>
-          <p class="note">We're looking for EP recording and mapping manufacturers — and the device and software companies that supply them — to partner through software licensing and joint development.</p>
+          <p class="lede">Reads the signals the lab already records. Results return to the workstation display in real time.</p>
+          <p class="note">Partnering through software licensing and joint development.</p>
           <a class="chip" href="#contact"><span>Discuss integration</span><span class="chip__arrow" aria-hidden="true">→</span></a>
         </div>
       </div>
@@ -153,11 +169,10 @@
       </header>
       <div class="stats">
         <div class="stat"><span class="stat__num">4,106</span><span class="stat__label">cases in our research dataset</span></div>
-        <div class="stat"><span class="stat__num">~15%</span><span class="stat__label">one-year recurrence after a first AF ablation at a single center</span><span class="stat__sub">Our clinical baseline, not an Electra result. 1,509 patients, ~70% paroxysmal / ~30% persistent.</span></div>
-        <div class="stat"><span class="stat__num">25%</span><span class="stat__label">less total procedure time in selected complex cases</span><span class="stat__sub">Development target, to be tested. Diagnosis and manual analysis 2 h → 1 h; total 4 h → 3 h.</span></div>
+        <div class="stat"><span class="stat__num">~15%</span><span class="stat__label">one-year recurrence after a first AF ablation at a single center</span><span class="stat__sub">Clinical baseline, not an Electra result. n = 1,509.</span></div>
+        <div class="stat"><span class="stat__num">50%</span><span class="stat__label">less time on diagnosis and manual analysis in selected complex cases</span><span class="stat__sub">Development target. 2 h → 1 h.</span></div>
       </div>
-      <p class="note">Validation goals: task time, measurement reliability and clinical quality.</p>
-      <p class="fine">Recurrence: retrospective data from a single Japanese academic center (Kaplan–Meier, 3-month blanking). The four-hour case and time targets are illustrative, not measured data. Electra is investigational software, not cleared by the FDA or any other regulator, and not available for clinical use.</p>
+      <p class="fine">Recurrence: single-center retrospective data (Kaplan–Meier). Time figures are illustrative targets. Electra is investigational software, not cleared by the FDA or any other regulator, and not available for clinical use.</p>
     </section>
 
     <section id="team" class="section section--tight reveal" style="--i: 6" aria-labelledby="h-team">
@@ -192,23 +207,12 @@
     </section>
 
     <section class="section section--tight reveal" style="--i: 7" id="contact" aria-labelledby="h-contact">
-      <header class="head-hang">
+      <div class="cta-simple">
         <h2 id="h-contact">Build and validate Electra with us</h2>
-      </header>
-      <ul class="partners">
-        <li>Equipment &amp; integration partners<small>EP recording and mapping manufacturers</small></li>
-        <li>Device &amp; software partners<small>Companies already supplying EP labs</small></li>
-        <li>Clinical &amp; research partners<small>Validate workflows and collaborate on research</small></li>
-        <li>Investors<small>Support clinical validation</small></li>
-      </ul>
-      <p class="note">Planned business model: software licensing + joint development with EP recording and mapping manufacturers.</p>
-      <div class="contact">
-        <div class="contact__rows">
-          <p class="contact__row"><span class="contact__key">Email</span><span class="contact__val"><a href="mailto:info@kukhai.ai">info@kukhai.ai</a></span></p>
-          <p class="contact__row"><span class="contact__key">Company</span><span class="contact__val">KUχAI (incorporation in progress) · Kyoto, Japan</span></p>
-        </div>
+        <p class="lede">For equipment partners, clinical teams and investors.</p>
+        <a class="cta-mail" href="mailto:info@kukhai.ai">info@kukhai.ai <span aria-hidden="true">→</span></a>
+        <p class="fine">KUχAI (incorporation in progress) · Kyoto, Japan · Long-term aspiration: zero recurrence.</p>
       </div>
-      <p class="note">Our long-term aspiration: zero recurrence.</p>
     </section>
 
   </main>
@@ -218,7 +222,7 @@
   <div class="shell">
     <p class="foot-stmt__line">Less repetitive work. More focus on clinical decisions.</p>
     <div class="foot-stmt__meta">
-      <span>KUχAI · Electra — pronounced KOO-kai</span>
+      <span>KUχAI · Electra</span>
       <a class="foot-stmt__li" href="https://www.linkedin.com/company/ku%CF%87ai/" rel="noopener" aria-label="KUχAI on LinkedIn" title="KUχAI on LinkedIn"><svg class="icon-li" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"></path></svg></a>
       <span>© 2026 KUχAI</span>
     </div>
@@ -235,10 +239,6 @@
   navHeight();
   window.addEventListener('resize', navHeight);
   if (window.ResizeObserver && pill) new ResizeObserver(navHeight).observe(pill);
-  var TEXT = [
-    'Electra groups the beats after pacing, colors matching activations and measures the intervals. The physician checks them against the original signals.',
-    'Electra plots each interval with its recent median trend, so changes during ablation stand out. The physician confirms them against the original signals.'
-  ];
   // each demo page reports its height; fit its iframe to it
   var frames = Array.prototype.slice.call(document.querySelectorAll('.demo-frame iframe'));
   window.addEventListener('message', function (e) {

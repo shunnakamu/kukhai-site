@@ -365,11 +365,39 @@ draw();
 <script>
 (function(){
   try { setTimeout(function(){ if (typeof setPlaying === 'function' && !playing) setPlaying(true); }, 600); } catch (e) {}
-  function report(){ try { parent.postMessage({kukhaiDemoHeight: document.documentElement.scrollHeight}, '*'); } catch (e) {} }
+  // the content's own height: documentElement.scrollHeight never drops below the iframe, so the frame could only grow
+  function report(){ try { var a = document.querySelector('.app') || document.body;
+    parent.postMessage({kukhaiDemoHeight: Math.ceil(a.getBoundingClientRect().bottom + window.scrollY)}, '*'); } catch (e) {} }
   window.addEventListener('load', report); window.addEventListener('resize', report);
   if (window.ResizeObserver) new ResizeObserver(report).observe(document.body);
 })();
 </script>
-<style>body{background-image:none!important} .app{padding-block:8px!important}</style>
+<style>body{background-image:none!important} .app{padding-block:8px!important}
+/* phone: the whole demo fits one screen (中村 2026-10-28「1画面でデモが完結するように」).
+   Keep the answer, the signals and the controls; drop the explanations, stat tiles and legends. */
+@media (max-width:600px){
+  .app{padding:4px 8px 6px!important}
+  .verdict{padding:10px 12px!important;margin-bottom:8px!important}
+  .verdict .lab{font-size:10px!important}
+  .verdict .big{font-size:1.2rem!important;margin-top:2px!important}
+  .verdict .why,.verdict .why b{display:none!important}
+  .verdict .nums{font-size:12px!important;margin-top:2px!important}
+  .bar label{font-size:0!important} .bar label b,.bar label select{font-size:12px!important}
+  .bar input[type=range]{width:100%!important}
+  .verdict .nums .site{font-size:15px!important;padding:1px 6px!important}
+  .verdict .row{gap:4px 16px!important}
+  .steps,.now,.legend,#legend{display:none!important}
+  .scope{margin-top:0!important}
+  .ctrl{padding:6px 8px!important;gap:6px!important}
+  .ctrl .pos{min-width:0!important}
+  .box{padding:8px!important}
+  .bar{gap:6px 10px!important;margin:0 0 6px!important;font-size:12px!important}
+  .bar button,.bar select,.btn{padding:6px 10px!important}
+  .jumps{gap:6px!important;margin:0 0 6px!important}
+  .jumps{font-size:0!important;flex-wrap:nowrap!important}
+  .jumps button,.jumps .btn{padding:4px 7px!important;font-size:11px!important;white-space:nowrap}
+  #wv{margin-top:6px!important}
+}
+</style>
 </body>
 </html>
