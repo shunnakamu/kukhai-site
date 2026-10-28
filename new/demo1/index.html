@@ -490,12 +490,15 @@ if(Q.has("t")) seekTo(Number(Q.get("t")));
   } else { setTimeout(function(){ vis(true); }, 600); }
   // the content's own height: documentElement.scrollHeight never drops below the iframe, so the frame could only grow
   function report(){ try { var a = document.querySelector('.app') || document.body;
-    parent.postMessage({kukhaiDemoHeight: Math.ceil(a.getBoundingClientRect().bottom + window.scrollY)}, '*'); } catch (e) {} }
+    parent.postMessage({kukhaiDemoHeight: Math.ceil(a.getBoundingClientRect().bottom + window.scrollY) + 4}, '*'); } catch (e) {} }
   window.addEventListener('load', report); window.addEventListener('resize', report);
   if (window.ResizeObserver) new ResizeObserver(report).observe(document.body);
 })();
 </script>
 <style>body{background-image:none!important} .app{padding-block:8px!important}
+/* the parent sizes the iframe to the content, so the frame never needs its own scrollbar (中村 2026-10-28「ダサい」) */
+html,body{overflow:hidden!important;scrollbar-width:none}
+html::-webkit-scrollbar,body::-webkit-scrollbar{display:none}
 /* phone: the whole demo fits one screen (中村 2026-10-28「1画面でデモが完結するように」).
    Keep the answer, the signals and the controls; drop the explanations, stat tiles and legends. */
 @media (max-width:600px){
